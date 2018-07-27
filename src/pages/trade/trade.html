@@ -1,0 +1,56 @@
+
+<ion-header>
+
+  <ion-navbar color = "secondary">
+    <ion-title text-center> Trade #{{trade.id}}</ion-title>
+  </ion-navbar>
+<div>
+  <ion-list>
+    <ion-item>
+  ID: {{trade.id}} 
+  </ion-item>
+  <ion-item>
+  Status: {{trade.status}}
+</ion-item>
+<ion-item>
+  Symbol: {{trade.ticker}}
+</ion-item>
+<ion-item>
+  Direction: {{trade.direction}}
+</ion-item>
+<ion-item>
+    Strategy: {{trade.strategy1}}
+  </ion-item>
+<ion-item>
+  Amount: {{trade.amount}}
+</ion-item>
+<ion-item>
+  Open Price: {{trade.signalBuyPrice}}
+</ion-item>
+<ion-item>
+  Open Time: {{trade.buyTimestamp}}
+</ion-item>
+<ion-item>
+  Close Price: {{trade.signalSellPrice}}
+</ion-item>
+<ion-item>
+  Close Time: {{trade.sellTimestamp}}
+</ion-item>
+<ion-item>
+  Percent Change: {{trade.percentChange}}
+</ion-item>
+
+<ion-item>
+  Notes: {{trade.strategy1Notes}}
+  </ion-item>
+  </ion-list>
+</div>
+
+
+
+</ion-header>
+
+
+<ion-content padding>
+
+</ion-content>

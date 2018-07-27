@@ -1,0 +1,25 @@
+
+<ion-header>
+
+  <ion-navbar color = "secondary">
+    <ion-title>Open Trades</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list-header>Equity Trades</ion-list-header>
+  <ion-item *ngFor="let equityOpenTrade of equityOpenTrades" (click)="openTradeTapped($event, equityOpenTrade)">
+        {{equityOpenTrade.direction}}
+        {{equityOpenTrade.ticker}}
+        ${{equityOpenTrade.signalBuyPrice}}
+</ion-item>
+<ion-list-header>Crypto Trades</ion-list-header>
+<ion-item *ngFor="let cryptoOpenTrade of cryptoOpenTrades" (click)="openTradeTapped($event, cryptoOpenTrade)">
+      {{cryptoOpenTrade.direction}}
+      {{cryptoOpenTrade.ticker}}
+      ${{cryptoOpenTrade.signalBuyPrice}}
+</ion-item>
+
+</ion-content>

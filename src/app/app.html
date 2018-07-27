@@ -1,0 +1,19 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar color = "secondary">
+      <ion-title text-center>Ephemera</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-list-header>Navigate</ion-list-header>
+      <button menuClose ion-item (click)="goToOpenTrades()">Open Trades</button>
+      <button menuClose ion-item (click)="goToViewTradesBy()">View Closed Trades By</button>
+      <button menuClose ion-item (click)="goStatistics()">Statistics</button>
+
+
+</ion-list>
+  </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -1,0 +1,66 @@
+
+<ion-header>
+
+  <ion-navbar color = "secondary">
+    <ion-title>Closed Trades</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+            Total Trades: {{totalCount}}
+          </ion-col>
+          <ion-col>
+            % Profitable: {{totalProfitable}}%
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            Total Equity: {{equityCount}}
+          </ion-col>
+          <ion-col>
+              % Profitable: {{equityProfitable}}%
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+              Total Crypto: {{cryptoCount}}
+            </ion-col>
+            <ion-col>
+          % Profitable: {{cryptoProfitable}}%
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+
+
+      <ion-grid>
+          <ion-row>
+            <ion-col>
+                <ion-list-header>Equity Trades</ion-list-header>
+            </ion-col>
+            <ion-col>
+                <ion-list-header>Crypto Trades</ion-list-header>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+                <ion-item *ngFor="let equityClosedTrade of equityClosedTrades" (click)="closedTradeTapped($event, equityClosedTrade)">
+                    {{equityClosedTrade.direction}}
+                    {{equityClosedTrade.ticker}}
+                    <span [ngStyle]="{'font-weight': 'bold', 'color': equityClosedTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityClosedTrade.percentChange}}%</span>
+                    </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item *ngFor="let cryptoClosedTrade of cryptoClosedTrades" (click)="closedTradeTapped($event, cryptoClosedTrade)">
+                    {{cryptoClosedTrade.direction}}
+                    {{cryptoClosedTrade.ticker}}
+                    <span [ngStyle]="{'font-weight': 'bold', 'color': cryptoClosedTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoClosedTrade.percentChange}}%</span>  
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+</ion-content>

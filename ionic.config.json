@@ -1,0 +1,9 @@
+{
+  "name": "PassionApp",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "defaultBrowser": "chrome"
+}

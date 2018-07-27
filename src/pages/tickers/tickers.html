@@ -1,0 +1,25 @@
+
+<ion-header>
+
+  <ion-navbar color = "secondary">
+    <ion-title>Symbols</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list-header>Equities</ion-list-header>
+    <ion-list inset>
+      <button *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">
+        {{equityTicker.name}}
+      </button>
+    </ion-list>  
+    <ion-list-header>Crypto</ion-list-header>
+    <ion-list inset>
+      <button *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">
+        {{cryptoTicker.name}}
+      </button>
+    </ion-list>  
+
+</ion-content>

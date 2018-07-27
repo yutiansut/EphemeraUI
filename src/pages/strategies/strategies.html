@@ -1,0 +1,27 @@
+
+<ion-header>
+
+  <ion-navbar color = "secondary">
+    <ion-title text-center>Strategies</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+<ion-title>
+  <br>
+  View Statistics on All Closed Trades
+  <br>
+  <br>
+</ion-title>
+
+  <ion-list-header>Strategies</ion-list-header>
+  <ion-list inset>
+    <button *ngFor="let strategy of strategies" ion-item (click)="equityStrategyTapped($event, strategy)">
+      {{strategy.name}}
+    </button>
+  </ion-list>  
+
+
+</ion-content>

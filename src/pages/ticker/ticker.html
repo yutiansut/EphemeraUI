@@ -1,0 +1,32 @@
+
+<ion-header>
+
+    <ion-navbar color = "secondary">
+      <ion-title text-center>{{ticker.name}}</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  <ion-content padding>
+      <ion-list-header>Equities</ion-list-header>
+
+      <ion-list inset>
+        <button *ngFor="let equityTickerTrade of equityTickerTrades" ion-item (click)="tradeTapped($event, equityTickerTrade)">
+            {{equityTickerTrade.direction}}
+            {{equityTickerTrade.ticker}}
+            <span [ngStyle]="{'font-weight': 'bold', 'color': equityTickerTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityTickerTrade.percentChange}}%</span>  
+        </button>
+        
+      </ion-list>  
+      <ion-list-header>Crypto</ion-list-header>
+      <ion-list inset>
+        <button *ngFor="let cryptoTickerTrade of cryptoTickerTrades" ion-item (click)="tradeTapped($event, cryptoTickerTrade)">
+            {{cryptoTickerTrade.direction}}
+            {{cryptoTickerTrade.ticker}}
+            <span [ngStyle]="{'font-weight': 'bold', 'color': cryptoTickerTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoTickerTrade.percentChange}}%</span>  
+        </button>
+      </ion-list>  
+  
+  
+  <ion-content padding>
+  
+  </ion-content>

@@ -13,24 +13,33 @@
             Total Trades: {{totalCount}}
           </ion-col>
           <ion-col>
-            % Profitable: {{totalProfitable}}%
+            Profitable: {{totalProfitable}}%
           </ion-col>
+          <ion-col>
+              Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': totalProfit >= 0 ? 'green' : 'red'}">{{totalProfit}}</span>
+            </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
             Total Equity: {{equityCount}}
           </ion-col>
           <ion-col>
-              % Profitable: {{equityProfitable}}%
+              Profitable: {{equityProfitable}}%
           </ion-col>
+          <ion-col>
+              Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': equityProfit >= 0 ? 'green' : 'red'}">{{equityProfit}}</span>
+            </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
               Total Crypto: {{cryptoCount}}
             </ion-col>
             <ion-col>
-          % Profitable: {{cryptoProfitable}}%
+          Profitable: {{cryptoProfitable}}%
             </ion-col>
+            <ion-col>
+                Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': cryptoProfit >= 0 ? 'green' : 'red'}">{{cryptoProfit}}</span>
+              </ion-col>
           </ion-row>
       </ion-grid>
 

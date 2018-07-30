@@ -3,9 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { StrategyPage } from '../strategy/strategy';
 import { ProvidersProvider } from '../../providers/providers/providers';
 
-
-
-
 @Component({
   selector: 'page-strategies',
   templateUrl: 'strategies.html',
@@ -19,6 +16,8 @@ export class StrategiesPage {
   ngOnInit(){
     this.provider.getAllStrategies().subscribe(data => this.strategies = data);
     }
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StrategiesPage');

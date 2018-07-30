@@ -4,21 +4,70 @@
     <ion-navbar color = "secondary">
       <ion-title>{{strategy.name}}</ion-title>
     </ion-navbar>
-  
   </ion-header>
-  
+  <ion-content padding>
+      <ion-grid>
+          <ion-row>
+            <ion-col>
+              Total Trades: {{totalCount}}
+            </ion-col>
+            <ion-col>
+              Profitable: {{totalProfitable}}%
+            </ion-col>
+            <ion-col>
+                Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': totalProfit >= 0 ? 'green' : 'red'}">{{totalProfit}}</span>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Total Equity: {{equityCount}}
+            </ion-col>
+            <ion-col>
+                Profitable: {{equityProfitable}}%
+            </ion-col>
+            <ion-col>
+                Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': equityProfit >= 0 ? 'green' : 'red'}">{{equityProfit}}</span>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col>
+                Total Crypto: {{cryptoCount}}
+              </ion-col>
+              <ion-col>
+            Profitable: {{cryptoProfitable}}%
+              </ion-col>
+              <ion-col>
+                  Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': cryptoProfit >= 0 ? 'green' : 'red'}">{{cryptoProfit}}</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
   
   <ion-content padding>
-    <ion-list-header>Equity Trades</ion-list-header>
-    <ion-item *ngFor="let equityStrategyTrade of equityStrategyTrades" (click)="tradeTapped($event, equityStrategyTrade)">
-          {{equityStrategyTrade.direction}}
-          {{equityStrategyTrade.ticker}}
-          <span [ngStyle]="{'font-weight': 'bold', 'color': equityStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityStrategyTrade.percentChange}}%</span>  </ion-item>
-  <ion-list-header>Crypto Trades</ion-list-header>
-  <ion-item *ngFor="let cryptoStrategyTrade of cryptoStrategyTrades" (click)="tradeTapped($event, cryptoStrategyTrade)">
-        {{cryptoStrategyTrade.direction}}
-        {{cryptoStrategyTrade.ticker}}
-        <span [ngStyle]="{'font-weight': 'bold', 'color': equityStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoStrategyTrade.percentChange}}%</span>  </ion-item>
-  
+      <ion-grid>
+          <ion-row>
+            <ion-col>
+                <ion-list-header>Equity Trades</ion-list-header>
+            </ion-col>
+            <ion-col>
+                <ion-list-header>Crypto Trades</ion-list-header>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+                <ion-item *ngFor="let equityStrategyTrade of equityStrategyTrades" (click)="tradeTapped($event, equityStrategyTrade)">
+                    {{equityStrategyTrade.direction}}
+                    {{equityStrategyTrade.ticker}}
+                    <span [ngStyle]="{'font-weight': 'bold', 'color': equityStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityStrategyTrade.percentChange}}%</span>
+                    </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item *ngFor="let cryptoStrategyTrade of cryptoStrategyTrades" (click)="tradeTapped($event, cryptoStrategyTrade)">
+                    {{cryptoStrategyTrade.direction}}
+                    {{cryptoStrategyTrade.ticker}}
+                    <span [ngStyle]="{'font-weight': 'bold', 'color': cryptoStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoStrategyTrade.percentChange}}%</span>  
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
   </ion-content>
   

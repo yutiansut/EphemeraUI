@@ -13,6 +13,7 @@
     <ion-list inset>
       <button *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">
         {{equityTicker.name}}
+        {{counterEquity(equityTicker.name)}}
       </button>
     </ion-list>  
     <ion-list-header>Crypto</ion-list-header>

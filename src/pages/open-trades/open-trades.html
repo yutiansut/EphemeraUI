@@ -9,17 +9,45 @@
 
 
 <ion-content padding>
-  <ion-list-header>Equity Trades</ion-list-header>
-  <ion-item *ngFor="let equityOpenTrade of equityOpenTrades" (click)="openTradeTapped($event, equityOpenTrade)">
-        {{equityOpenTrade.direction}}
-        {{equityOpenTrade.ticker}}
-        ${{equityOpenTrade.signalBuyPrice}}
-</ion-item>
-<ion-list-header>Crypto Trades</ion-list-header>
-<ion-item *ngFor="let cryptoOpenTrade of cryptoOpenTrades" (click)="openTradeTapped($event, cryptoOpenTrade)">
-      {{cryptoOpenTrade.direction}}
-      {{cryptoOpenTrade.ticker}}
-      ${{cryptoOpenTrade.signalBuyPrice}}
-</ion-item>
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+              <ion-list-header text-center>Equity Trades</ion-list-header>
+          </ion-col>
+          <ion-col>
+              <ion-list-header text-center>Crypto Trades</ion-list-header>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <ion-list-header [ngStyle]="{'font-size': '9px'}">Long</ion-list-header>
+              <ion-item *ngFor="let equityLong of equityLong" (click)="openTradeTapped($event, equityLong)">
+                  {{equityLong.ticker}} - 
+                  {{equityLong.strategy1}}
+                  </ion-item>
+                  <br>
+
+              <ion-list-header [ngStyle]="{'font-size': '9px'}">Short</ion-list-header>    
+              <ion-item *ngFor="let equityShort of equityShort" (click)="openTradeTapped($event, equityShort)">
+                      {{equityShort.ticker}} - 
+                      {{equityShort.strategy1}}
+                      </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-list-header [ngStyle]="{'font-size': '9px'}">Long</ion-list-header>
+              <ion-item *ngFor="let cryptoLong of cryptoLong" (click)="openTradeTapped($event, cryptoLong)">
+                  {{cryptoLong.ticker}} - 
+                  {{cryptoLong.strategy1}}
+            </ion-item>
+            <br>
+
+            <ion-list-header [ngStyle]="{'font-size': '9px'}">Short</ion-list-header>    
+            <ion-item *ngFor="let cryptoShort of cryptoShort" (click)="openTradeTapped($event, cryptoShort)">
+                    {{cryptoShort.ticker}} - 
+                    {{cryptoShort.strategy1}}
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
 </ion-content>

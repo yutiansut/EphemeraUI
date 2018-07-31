@@ -14,6 +14,7 @@ export class TickersPage {
   public equityTickers : any;
   public cryptoTickers : any;
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public provider : ProvidersProvider) {
   }
   ngOnInit(){
@@ -25,18 +26,8 @@ export class TickersPage {
     const response1 = await this.provider.getCryptoTradesByTicker().toPromise();
     this.equityTickers = response;
     this.cryptoTickers = response1;
-    
-  }
 
-  async counterCrypto(ticker){
-    const p = new TickerPage(this.navCtrl, this.navParams, this.provider);
-      this.countCrypto = await p.getCryptoCount(ticker);
-  }
-
-  async counterEquity(ticker){
-    const p = new TickerPage(this.navCtrl, this.navParams, this.provider);
-      this.countEquity = await p.getEquityCount(ticker);
-  }
+    }
 
 
   equityTickerTapped($event, equityTicker){

@@ -76,24 +76,6 @@ export class TickerPage {
       this.navCtrl.push(TradePage, trade);
     }
 
-    public async getEquityCount(symbol){
-      var count = 0;
-      const response =  await this.provider.getEquityTradesBySymbol(symbol.name).toPromise();
-        for(let trade of response){
-          count++;
-        }
 
-        return count;
-    }
-
-    public async getCryptoCount(symbol){
-      var count = 0;
-      const response = await this.provider.getCryptoTradesBySymbol(symbol.name).toPromise();
-      for(let trade of response){
-        count++;
-      }
-
-      return count;
-    }
 
 }

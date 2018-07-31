@@ -1,13 +1,37 @@
 
 <ion-header>
-
   <ion-navbar color = "secondary">
     <ion-title text-center>Statistics</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+
+  <h4 text-center>Total Profit</h4>
+  <canvas #lineCanvas></canvas>
+
+  </ion-col>
+  <ion-col>
+
+      <h4 text-center>Daily Profit</h4>
+      <canvas #barCanvas></canvas>
+
+  </ion-col>
+  </ion-row>
+  </ion-grid>
+
+
+  <ion-card>
+  <h4 text-center>Total Equity Profit</h4>
+  <canvas #lineCanvas1></canvas>
+  </ion-card>
+  <ion-card>
+  <h4 text-center>Total Crypto Profit</h4>
+  <canvas #lineCanvas2></canvas>
+  </ion-card>
 
 </ion-content>

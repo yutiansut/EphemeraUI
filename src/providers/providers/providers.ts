@@ -11,6 +11,7 @@ export class ProvidersProvider {
   public EQUITY_TRADE_SIGNALS  = this.API + '/equity-trade-signals';
   public CRYPTO_TRADES  = this.API + '/crypto-trades';
   public CRYPTO_TRADE_SIGNALS  = this.API + '/crypto-trade-signals';
+  public PNL  = this.API + '/pnl';
 
   constructor(public http: HttpClient) {
   }
@@ -75,6 +76,38 @@ getCryptoTradesByTicker(): Observable<any>{
 
 getAllStrategies(): Observable<any>{
   return this.http.get(this.API + "/all")
+}
+
+getAllPnL(): Observable<any>{
+  return this.http.get(this.PNL + "/all")
+}
+
+getPnLDates(): Observable<any>{
+  return this.http.get(this.PNL + "/dates")
+}
+
+getRunningTotal(): Observable<any>{
+  return this.http.get(this.PNL + "/runningprofit")
+}
+
+getRunningEquity(): Observable<any>{
+  return this.http.get(this.PNL + "/runningequity")
+}
+
+getRunningCrypto(): Observable<any>{
+  return this.http.get(this.PNL + "/runningcrypto")
+}
+
+getDailyTotal(): Observable<any>{
+  return this.http.get(this.PNL + "/dailyprofit")
+}
+
+getDailyEquity(): Observable<any>{
+  return this.http.get(this.PNL + "/dailyequity")
+}
+
+getDailyCrypto(): Observable<any>{
+  return this.http.get(this.PNL + "/dailycrypto")
 }
 
 

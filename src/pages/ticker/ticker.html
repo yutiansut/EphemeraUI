@@ -22,7 +22,7 @@
   </ion-grid>
 
   <ion-content padding>
-      <ion-list inset>
+      <ion-list>
         <button *ngFor="let equityTickerTrade of equityTickerTrades" ion-item (click)="tradeTapped($event, equityTickerTrade)">
             {{equityTickerTrade.direction}}
             {{equityTickerTrade.ticker}}

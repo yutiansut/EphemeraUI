@@ -6,7 +6,7 @@
   </ion-navbar>
 
 </ion-header>
-<ion-content padding>
+<ion-content >
       <ion-grid>
           <ion-row>
             <ion-col>
@@ -16,19 +16,22 @@
                 <ion-list-header>Crypto Trades</ion-list-header>
             </ion-col>
           </ion-row>
+          </ion-grid>
+<ion-content>
+      <ion-grid>
           <ion-row>
             <ion-col>
                 <ion-item *ngFor="let equityClosedTrade of equityClosedTrades" (click)="closedTradeTapped($event, equityClosedTrade)">
-                    {{equityClosedTrade.direction}}
-                    {{equityClosedTrade.ticker}}
-                    <span [ngStyle]="{'font-weight': 'bold', 'color': equityClosedTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityClosedTrade.percentChange}}%</span>
+                    <h5>{{equityClosedTrade.direction}}
+                   {{equityClosedTrade.ticker}}
+                    <span [ngStyle]="{'font-weight': 'bold', 'color': equityClosedTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityClosedTrade.percentChange}}%</span></h5>
                     </ion-item>
             </ion-col>
             <ion-col>
                 <ion-item *ngFor="let cryptoClosedTrade of cryptoClosedTrades" (click)="closedTradeTapped($event, cryptoClosedTrade)">
-                    {{cryptoClosedTrade.direction}}
+                    <h5>{{cryptoClosedTrade.direction}}
                     {{cryptoClosedTrade.ticker}}
-                    <span [ngStyle]="{'font-weight': 'bold', 'color': cryptoClosedTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoClosedTrade.percentChange}}%</span>  
+                    <span [ngStyle]="{'font-weight': 'bold', 'color': cryptoClosedTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoClosedTrade.percentChange}}%</span></h5>
               </ion-item>
             </ion-col>
           </ion-row>

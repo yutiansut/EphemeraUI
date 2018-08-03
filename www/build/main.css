@@ -25677,3 +25677,51 @@ ion-navbar.toolbar {
   min-height: calc(46px + constant(safe-area-inset-bottom));
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
+
+.ios page-overview .ion-heading, .md page-overview .ion-heading {
+  font-size: 14px;
+  color: #686868;
+  font-weight: 500;
+}
+
+.ios page-overview .ion-content, .md page-overview .ion-content {
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
+}
+
+.ios page-ticker .ion-heading, .md page-ticker .ion-heading {
+  font-size: 14px;
+  color: #adadad;
+  font-weight: 500;
+}
+
+.ios page-ticker .ion-content, .md page-ticker .ion-content {
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
+}
+
+.ios page-tickers .ion-heading, .md page-tickers .ion-heading {
+  font-size: 14px;
+  color: #adadad;
+  font-weight: 500;
+}
+
+.ios page-tickers .ion-content, .md page-tickers .ion-content {
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
+}
+
+.ios page-trade .ion-heading, .md page-trade .ion-heading {
+  font-size: 14px;
+  color: #adadad;
+  font-weight: 500;
+}
+
+.ios page-trade .ion-content, .md page-trade .ion-content {
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
+}

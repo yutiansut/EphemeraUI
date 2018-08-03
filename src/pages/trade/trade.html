@@ -1,56 +1,92 @@
 
 <ion-header>
-
   <ion-navbar color = "secondary">
     <ion-title text-center> Trade #{{trade.id}}</ion-title>
   </ion-navbar>
-<div>
-  <ion-list>
-    <ion-item>
-  ID: {{trade.id}} 
-  </ion-item>
-  <ion-item>
-  Status: {{trade.status}}
-</ion-item>
-<ion-item>
-  Symbol: {{trade.ticker}}
-</ion-item>
-<ion-item>
-  Direction: {{trade.direction}}
-</ion-item>
-<ion-item>
-    Strategy: {{trade.strategy1}}
-  </ion-item>
-<ion-item>
-  Amount: {{trade.amount}}
-</ion-item>
-<ion-item>
-  Open Price: {{trade.signalBuyPrice}}
-</ion-item>
-<ion-item>
-  Open Time: {{trade.buyTimestamp}}
-</ion-item>
-<ion-item>
-  Close Price: {{trade.signalSellPrice}}
-</ion-item>
-<ion-item>
-  Close Time: {{trade.sellTimestamp}}
-</ion-item>
-<ion-item>
-  Percent Change: {{trade.percentChange}}%
-</ion-item>
-
-<ion-item>
-  Notes: {{trade.strategy1Notes}}
-  </ion-item>
-  </ion-list>
-</div>
+</ion-header> 
 
 
+<ion-content>
+  <ion-grid>
 
-</ion-header>
+ <ion-row>   
+    <ion-col>
+      <ion-item>
+          <span class = "ion-heading">Status </span><br>
+          <span class = "ion-content">{{trade.status}}</span>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+        <ion-item [ngStyle]="{'visibility': trade.status == 'OPEN' ? 'hidden' : 'visible' }">
+            <span class = "ion-heading">Percent Change </span><br>
+            <span class = "ion-content" [ngStyle]="{'font-weight': 'bold', 'color': percentChange >= 0 ? 'green' : 'red'}">{{trade.percentChange}}%</span>          
+          </ion-item>
+    </ion-col>
+</ion-row>
+<ion-row>   
+    <ion-col>
+      <ion-item>
+          <span class = "ion-heading">Symbol </span><br> 
+          <span class = "ion-content">{{trade.ticker}}</span>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+        <ion-item>
+            <span class = "ion-heading">Amount </span><br>
+            <span class = "ion-content">{{trade.amount}}</span>
+          </ion-item>
+      </ion-col>
+</ion-row>
 
-
-<ion-content padding>
-
+<ion-row>   
+    <ion-col>
+      <ion-item>
+          <span class = "ion-heading">Direction </span><br>
+          <span class = "ion-content">{{trade.direction}}</span>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+        <ion-item>
+            <span class = "ion-heading">Strategy </span><br>
+            <span class = "ion-content">{{trade.strategy1}}</span>
+          </ion-item>
+      </ion-col>
+</ion-row>
+<ion-row>   
+    <ion-col>
+        <ion-item>
+            <span class = "ion-heading">Open Price </span><br>
+            <span class = "ion-content">${{trade.signalBuyPrice}}</span>
+          </ion-item>
+    </ion-col>
+    <ion-col>
+        <ion-item>
+            <span class = "ion-heading">Open Time </span><br>
+            <span class = "ion-content">{{trade.buyTimestamp}}</span>
+          </ion-item>
+      </ion-col>
+</ion-row>        
+<ion-row [ngStyle]="{'visibility': trade.status == 'OPEN' ? 'hidden' : 'visible' }">   
+    <ion-col>
+        <ion-item>
+            <span class = "ion-heading">Close Price </span><br>
+            <span class = "ion-content">${{trade.signalSellPrice}}</span>
+          </ion-item>
+    </ion-col>
+    <ion-col>
+        <ion-item>
+            <span class = "ion-heading">Close Time </span><br>
+            <span class = "ion-content">{{trade.sellTimestamp}}</span>
+          </ion-item>
+      </ion-col>
+</ion-row>   
+<ion-row>  
+    <ion-col>
+          <ion-item>
+            <span class = "ion-heading">Notes </span><br>
+            <span class = "ion-content">{{trade.strategy1Notes}}</span>
+          </ion-item>
+      </ion-col>
+</ion-row>   
+</ion-grid> 
 </ion-content>

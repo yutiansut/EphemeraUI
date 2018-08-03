@@ -23,6 +23,7 @@ export class StrategyPage {
   cryptoProfit: number;
   totalProfit: number;
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public provider : ProvidersProvider) {
     this.strategy = this.navParams.data;
   }
@@ -72,10 +73,9 @@ export class StrategyPage {
           this.equityProfit = +(tradesProfit.toFixed(2));
           this.cryptoProfit = +(tradesProfit1.toFixed(2));
           this.totalProfit = +((tradesProfit + tradesProfit1).toFixed(2));
-        }
-
-
-    compare(a,b){
+        } 
+    
+        compare(a,b){
       const tradeA = a.id;
       const tradeB = b.id;
       let comparison = 0;

@@ -10,28 +10,51 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-
-  <h4 text-center>Total Profit</h4>
-  <canvas #lineCanvas></canvas>
-
+          <ion-card>
+      <h2 text-center>Total Profit</h2>
+      <canvas #lineCanvas></canvas>
+      </ion-card>
   </ion-col>
   <ion-col>
-
-      <h4 text-center>Daily Profit</h4>
+      <ion-card>
+      <h2 text-center>Daily Profit</h2>
       <canvas #barCanvas></canvas>
-
+      </ion-card>
   </ion-col>
   </ion-row>
+ 
+
+<ion-row>
+  <ion-col>
+  <ion-card>
+  <h2 text-center>Total Equity Profit</h2>
+  <canvas #lineCanvas1></canvas>
+  </ion-card>
+  </ion-col>
+  <ion-col>
+      <ion-card>
+      <h2 text-center>Daily Equity Profit</h2>
+      <canvas #barCanvas1></canvas>
+      </ion-card>
+  </ion-col>
+  </ion-row>
+
+<ion-row>
+    <ion-col>
+    <ion-card>
+    <h2 text-center>Total Crypto Profit</h2>
+    <canvas #lineCanvas2></canvas>
+    </ion-card>
+    </ion-col>
+    <ion-col>
+        <ion-card>
+        <h2 text-center>Daily Crypto Profit</h2>
+        <canvas #barCanvas2></canvas>
+        </ion-card>
+    </ion-col>
+    </ion-row>
   </ion-grid>
 
 
-  <ion-card>
-  <h4 text-center>Total Equity Profit</h4>
-  <canvas #lineCanvas1></canvas>
-  </ion-card>
-  <ion-card>
-  <h4 text-center>Total Crypto Profit</h4>
-  <canvas #lineCanvas2></canvas>
-  </ion-card>
-
 </ion-content>
+

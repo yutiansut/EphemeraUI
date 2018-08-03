@@ -10,18 +10,21 @@
 <ion-grid>
     <ion-row>
         <ion-col>
-          Trades: {{count}}
+          <span class = "ion-heading">Trades</span><br>
+          <span class = "ion-content">{{count}}</span>
         </ion-col>
         <ion-col>
-      Profitable: {{tradeProfitable}}%
+            <span class = "ion-heading">Profitable</span><br> 
+            <span class = "ion-content">{{tradeProfitable}}%</span>
         </ion-col>
         <ion-col>
-            Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': tradeProfit >= 0 ? 'green' : 'red'}">{{tradeProfit}}</span>
+            <span class = "ion-heading">Profit</span><br>
+            $<span class = "ion-content" [ngStyle]="{'font-weight': 'bold', 'color': tradeProfit >= 0 ? 'green' : 'red'}">{{tradeProfit}}</span>
           </ion-col>
       </ion-row>
   </ion-grid>
 
-  <ion-content padding>
+  <ion-content>
       <ion-list>
         <button *ngFor="let equityTickerTrade of equityTickerTrades" ion-item (click)="tradeTapped($event, equityTickerTrade)">
             {{equityTickerTrade.direction}}

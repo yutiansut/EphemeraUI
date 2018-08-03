@@ -8,18 +8,33 @@
 </ion-header>
 
 
-<ion-content padding>
-    <ion-list-header>Equities</ion-list-header>
-    <ion-list inset>
-      <button *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">
-        {{equityTicker.name}}
-      </button>
-    </ion-list>  
-    <ion-list-header>Crypto</ion-list-header>
-    <ion-list inset>
-      <button *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">
-        {{cryptoTicker.name}}
-      </button>
-    </ion-list>  
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list-header text-center>Equities</ion-list-header>
+      </ion-col>
+      <ion-col>  
+        <ion-list-header text-center>Crypto</ion-list-header>
+      </ion-col>
+    </ion-row>
 
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <button *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">
+            {{equityTicker.name}}
+          </button>
+        </ion-list>
+      </ion-col>
+
+    <ion-col>
+      <ion-list>
+        <button *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">
+        {{cryptoTicker.name}}
+        </button>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 </ion-content>

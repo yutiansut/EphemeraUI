@@ -22,17 +22,17 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <button *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">
+          <ion-item *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">
             {{equityTicker.name}}
-          </button>
+          </ion-item>
         </ion-list>
       </ion-col>
 
     <ion-col>
       <ion-list>
-        <button *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">
+        <ion-item *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">
         {{cryptoTicker.name}}
-        </button>
+        </ion-item>
       </ion-list>
     </ion-col>
   </ion-row>

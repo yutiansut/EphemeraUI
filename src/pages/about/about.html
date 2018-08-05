@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color = "secondary">
+    <ion-title>About</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Ephemera 
+    </ion-list-header>
+    <a ion-item (click)="openModal({page: 0})">
+      Abstract
+    </a>
+    <a ion-item (click)="openModal({page: 1})">
+      Technology
+    </a>
+    <a ion-item (click)="openModal({page: 2})">
+      Strategies
+    </a>
+  </ion-list>
+
+</ion-content>

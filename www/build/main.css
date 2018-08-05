@@ -25678,6 +25678,27 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+page-about ion-list-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.ios page-modal-content .ion-heading, .md page-modal-content .ion-heading {
+  font-size: 14px;
+  color: #adadad;
+  font-weight: 500;
+}
+
+.ios page-modal-content .ion-content, .md page-modal-content .ion-content {
+  font-size: 16px;
+  color: black;
+  font-weight: 350;
+}
+
 .ios page-overview .ion-heading, .md page-overview .ion-heading {
   font-size: 14px;
   color: #686868;

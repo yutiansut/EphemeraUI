@@ -29,7 +29,7 @@
                   {{equityLong.strategy1}}</h5>
                   </ion-item>
 
-
+                  <br><br>
               <ion-list-header [ngStyle]="{'font-size': '9px'}">Short</ion-list-header>    
               <ion-item *ngFor="let equityShort of equityShort" (click)="openTradeTapped($event, equityShort)">
                       <h5>{{equityShort.ticker}} - 
@@ -43,7 +43,7 @@
                   {{cryptoLong.strategy1}}</h5>
             </ion-item>
 
-
+            <br><br>
             <ion-list-header [ngStyle]="{'font-size': '9px'}">Short</ion-list-header>    
             <ion-item *ngFor="let cryptoShort of cryptoShort" (click)="openTradeTapped($event, cryptoShort)">
                     <h5>{{cryptoShort.ticker}} - 

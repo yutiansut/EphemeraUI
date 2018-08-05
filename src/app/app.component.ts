@@ -5,11 +5,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { OverviewPage } from '../pages/overview/overview';
 import { StatisticsPage } from '../pages/statistics/statistics';
-import { StrategiesPage } from '../pages/strategies/strategies';
-import { ClosedTradesPage } from '../pages/closed-trades/closed-trades';
 import { OpenTradesPage } from '../pages/open-trades/open-trades';
 import { TickersPage } from '../pages/tickers/tickers';
-import { StrategyPage } from '../pages/strategy/strategy';
+import { AboutPage } from '../pages/about/about';
 
 @Component({
   templateUrl: 'app.html'
@@ -43,24 +41,18 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-  goStatistics(){
+  goToStatistics(){
     this.nav.push(StatisticsPage)
   }
 
-  goToStrategies(){
-    this.nav.push(StrategiesPage)
-  }
-
-  goToStrategy(){
-    this.nav.push(StrategyPage)
+  goToAbout(){
+    this.nav.push(AboutPage);
   }
 
   goToOpenTrades(){
     this.nav.push(OpenTradesPage)
   }
-  goToClosedTrades(){
-    this.nav.push(ClosedTradesPage)
-  }
+
   goToViewTradesBy(){
     this.nav.push(ViewtradebyPage)
   }

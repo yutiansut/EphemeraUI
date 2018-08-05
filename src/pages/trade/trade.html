@@ -19,7 +19,7 @@
     <ion-col>
         <ion-item [ngStyle]="{'visibility': trade.status == 'OPEN' ? 'hidden' : 'visible' }">
             <span class = "ion-heading">Percent Change </span><br>
-            <span class = "ion-content" [ngStyle]="{'font-weight': 'bold', 'color': percentChange >= 0 ? 'green' : 'red'}">{{trade.percentChange}}%</span>          
+            <span class = "ion-content" [ngStyle]="{'font-weight': 'bold', 'color': trade.percentChange >= 0 ? 'green' : 'red'}">{{trade.percentChange}}%</span>          
           </ion-item>
     </ion-col>
 </ion-row>

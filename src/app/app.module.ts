@@ -1,5 +1,6 @@
+import { ModalContentPage } from './../pages/about/modal-content';
 import { ViewtradebyPage } from '../pages/viewtradeby/viewtradeby';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ClosedTradesPage } from '../pages/closed-trades/closed-trades';
 import { OpenTradesPage } from '../pages/open-trades/open-trades';
 import { TradePage } from '../pages/trade/trade';
@@ -15,6 +16,7 @@ import { StrategyPage } from '../pages/strategy/strategy';
 import { ProvidersProvider } from '../providers/providers/providers';
 import { TickersPage } from '../pages/tickers/tickers';
 import { TickerPage } from '../pages/ticker/ticker';
+import { AboutPage } from '../pages/about/about';
 import { MyApp } from './app.component';
 
 
@@ -30,7 +32,9 @@ import { MyApp } from './app.component';
     OpenTradesPage,
     ViewtradebyPage,
     TickersPage,
-    TickerPage
+    TickerPage,
+    AboutPage,
+    ModalContentPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import { MyApp } from './app.component';
     OpenTradesPage,
     ViewtradebyPage,
     TickersPage,
-    TickerPage
+    TickerPage,
+    AboutPage,
+    ModalContentPage
 
   ],
   providers: [

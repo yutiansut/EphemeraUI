@@ -45,6 +45,20 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>
+                            <span class = "ion-heading">Total Forex </span><br>
+                        <span class = "ion-content">{{forexCount}}</span>
+                    </ion-col>
+                    <ion-col>
+                        <span class = "ion-heading">Profitable </span> <br>
+                        <span class = "ion-content">{{forexProfitable}}%</span>
+                    </ion-col>
+                    <ion-col>
+                        <span class = "ion-heading">Profit </span><br>
+                        $<span class = "ion-content" [ngStyle]="{'font-weight': 'bold', 'color': forexProfit >= 0 ? 'green' : 'red'}">{{forexProfit}}</span>
+                      </ion-col>
+                  </ion-row>
+                <ion-row>
+                    <ion-col>
                             <span class = "ion-heading">Total Crypto </span><br>
                         <span class = "ion-content">{{cryptoCount}}</span>
                     </ion-col>

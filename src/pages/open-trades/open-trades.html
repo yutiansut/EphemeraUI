@@ -1,56 +1,67 @@
 
 <ion-header>
-
-  <ion-navbar color = "secondary">
-    <ion-title>Open Trades</ion-title>
-  </ion-navbar>
-
-</ion-header>
+        <ion-navbar color = "secondary">
+          <ion-title>Open Trades</ion-title>
+        </ion-navbar>
+        <ion-toolbar no-border-top>
+          <ion-segment [(ngModel)]="opentrades">
+            <ion-segment-button value = 'equityOpenTrades'>
+              Equity
+            </ion-segment-button>
+            <ion-segment-button value = 'forexOpenTrades'>
+              Forex
+            </ion-segment-button>
+            <ion-segment-button value = 'cryptoOpenTrades'>
+              Crypto
+            </ion-segment-button>
+          </ion-segment>
+        </ion-toolbar>
+      </ion-header>
 
 
 <ion-content>
-    <ion-grid>
-        <ion-row>
-          <ion-col>
-              <ion-list-header text-center>Equity Trades</ion-list-header>
-          </ion-col>
-          <ion-col>
-              <ion-list-header text-center>Crypto Trades</ion-list-header>
-          </ion-col>
-        </ion-row>
-        </ion-grid>
-<ion-content>
-        <ion-grid>
-        <ion-row>
-          <ion-col>
-              <ion-list-header [ngStyle]="{'font-size': '9px'}">Long</ion-list-header>
+        <div [ngSwitch]="opentrades">
+            <ion-list *ngSwitchCase="'equityOpenTrades'">
+              <ion-list-header>Long</ion-list-header>
               <ion-item *ngFor="let equityLong of equityLong" (click)="openTradeTapped($event, equityLong)">
                   <h5>{{equityLong.ticker}} - 
                   {{equityLong.strategy1}}</h5>
                   </ion-item>
-
-                  <br><br>
-              <ion-list-header [ngStyle]="{'font-size': '9px'}">Short</ion-list-header>    
+              <ion-list-header>Short</ion-list-header>    
               <ion-item *ngFor="let equityShort of equityShort" (click)="openTradeTapped($event, equityShort)">
                       <h5>{{equityShort.ticker}} - 
                       {{equityShort.strategy1}}</h5>
-                      </ion-item>
-          </ion-col>
-          <ion-col>
-              <ion-list-header [ngStyle]="{'font-size': '9px'}">Long</ion-list-header>
+                </ion-item>
+            </ion-list>
+
+
+        <ion-list *ngSwitchCase="'forexOpenTrades'">
+                <ion-list-header>Long</ion-list-header>
+                <ion-item *ngFor="let forexLong of forexLong" (click)="openTradeTapped($event, forexLong)">
+                    <h5>{{forexLong.pair}} - 
+                    {{forexLong.strategy1}}</h5>
+              </ion-item>
+  
+              <ion-list-header>Short</ion-list-header>    
+              <ion-item *ngFor="let forexShort of forexShort" (click)="openTradeTapped($event, forexShort)">
+                      <h5>{{forexShort.pair}} - 
+                      {{forexShort.strategy1}}</h5>
+              </ion-item>
+          </ion-list>
+
+        <ion-list *ngSwitchCase="'cryptoOpenTrades'">
+              <ion-list-header>Long</ion-list-header>
               <ion-item *ngFor="let cryptoLong of cryptoLong" (click)="openTradeTapped($event, cryptoLong)">
                   <h5>{{cryptoLong.ticker}} - 
                   {{cryptoLong.strategy1}}</h5>
             </ion-item>
 
-            <br><br>
-            <ion-list-header [ngStyle]="{'font-size': '9px'}">Short</ion-list-header>    
+            <ion-list-header>Short</ion-list-header>    
             <ion-item *ngFor="let cryptoShort of cryptoShort" (click)="openTradeTapped($event, cryptoShort)">
                     <h5>{{cryptoShort.ticker}} - 
                     {{cryptoShort.strategy1}}</h5>
             </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+        </ion-list>
+    </div>
 
 </ion-content>

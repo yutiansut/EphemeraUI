@@ -17,14 +17,18 @@ export class OverviewPage {
   opentrades : any;
   equityClosedTrades : any;
   cryptoClosedTrades : any;
+  forexClosedTrades : any;
   equityCount: number;
   cryptoCount: number;
+  forexCount: number;
   totalCount: number;
   totalProfitable : number;
   equityProfitable: number;
   cryptoProfitable: number;
+  forexProfitable: number;
   equityProfit: number;
   cryptoProfit: number;
+  forexProfit: number;
   totalProfit: number;
   lineChart: any;
   linechartInput: any;
@@ -44,11 +48,14 @@ ngOnInit(){
 async getTrades(){
   const response =  await this.provider.getClosedEquityTrades().toPromise();
   const response1 = await this.provider.getClosedCryptoTrades().toPromise();
+  const response2 = await this.provider.getClosedForexTrades().toPromise();
   this.equityClosedTrades = response;
   this.cryptoClosedTrades = response1;
-  await this.getStats(response, response1);
+  this.forexClosedTrades = response2;
+  await this.getStats(response, response1, response2);
   this.equityClosedTrades = await this.equityClosedTrades.sort(this.compare2);
   this.cryptoClosedTrades = await this.cryptoClosedTrades.sort(this.compare2);
+  this.forexClosedTrades = await this.forexClosedTrades.sort(this.compare2);
 }
 
 async getChart(){
@@ -112,13 +119,16 @@ this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
 }
 
-getStats(data, data1){
+getStats(data, data1, data2){
   var count = 0;
   var count1 = 0;
+  var count2 = 0;
   var tradesProfitable = 0
   var tradesProfitable1 = 0;
+  var tradesProfitable2 = 0;
   var tradesProfit = 0;
   var tradesProfit1 = 0;
+  var tradesProfit2 = 0;
     for(let trade of data){
       count++;
       tradesProfit += (((trade.percentChange/100) * trade.signalBuyPrice)*trade.amount);
@@ -133,15 +143,26 @@ getStats(data, data1){
         tradesProfitable1++;
       }
     }
+
+    for(let trade of data2){
+      count2++;
+      tradesProfit2 += (((trade.percentChange/100) * trade.signalBuyPrice)*trade.amount);
+      if(trade.percentChange >= 0){
+        tradesProfitable2++;
+      }
+    }
       this.equityCount = count;
       this.cryptoCount = count1; 
-      this.totalCount = count + count1;
+      this.forexCount = count2;
+      this.totalCount = count + count1 + count2;
       this.equityProfitable = Math.round(((tradesProfitable/count) * 100) * 10)/10;
       this.cryptoProfitable = Math.round(((tradesProfitable1/count1) * 100) * 10)/10;
-      this.totalProfitable = Math.round(((tradesProfitable + tradesProfitable1)/(count + count1)*100)*10)/10;
+      this.forexProfitable = Math.round(((tradesProfitable2/count2) * 100) * 10)/10;
+      this.totalProfitable = Math.round(((tradesProfitable + tradesProfitable1 + tradesProfitable2)/(count + count1 + count2)*100)*10)/10;
       this.equityProfit = +(tradesProfit.toFixed(2));
       this.cryptoProfit = +(tradesProfit1.toFixed(2));
-      this.totalProfit = +((tradesProfit + tradesProfit1).toFixed(2));
+      this.forexProfit = +(tradesProfit2.toFixed(2));
+      this.totalProfit = +((tradesProfit + tradesProfit1 + tradesProfit2).toFixed(2));
     }
 
 compare(a,b){

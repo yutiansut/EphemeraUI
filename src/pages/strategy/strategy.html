@@ -4,32 +4,108 @@
     <ion-navbar color = "secondary">
       <ion-title>{{strategy.name}}</ion-title>
     </ion-navbar>
-  </ion-header>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="closedtrades">
+          <ion-segment-button value = 'equityStrategyTrades'>
+            Equity
+          </ion-segment-button>
+          <ion-segment-button value = 'forexStrategyTrades'>
+            Forex
+          </ion-segment-button>
+          <ion-segment-button value = 'cryptoStrategyTrades'>
+            Crypto
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+    </ion-header>
+
+
+
   <ion-content>
-      <ion-grid>
-          <ion-row>
-            <ion-col>
-              Total Trades: {{totalCount}}
-            </ion-col>
-            <ion-col>
-              Profitable: {{totalProfitable}}%
-            </ion-col>
-            <ion-col>
-                Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': totalProfit >= 0 ? 'green' : 'red'}">{{totalProfit}}</span>
+
+
+          <ion-content>
+              <div [ngSwitch]="closedtrades">
+                  <ion-list *ngSwitchCase="'equityStrategyTrades'">
+                    <ion-row>
+                      <ion-col>
+                        Total Trades: {{totalCount}}
+                      </ion-col>
+                      <ion-col>
+                        Profitable: {{totalProfitable}}%
+                      </ion-col>
+                      <ion-col>
+                          Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': totalProfit >= 0 ? 'green' : 'red'}">{{totalProfit}}</span>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                          Total Equity: <span [ngStyle]="{'visibility': equityCount == 0 ? 'hidden' : 'visible' }">{{equityCount}}</span>
+                        </ion-col>
+                        <ion-col>
+                            Profitable: <span [ngStyle]="{'visibility': equityCount == 0 ? 'hidden' : 'visible' }">{{equityProfitable}}%</span>
+                        </ion-col>
+                        <ion-col>
+                            Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': equityProfit >= 0 ? 'green' : 'red', 'visibility': equityCount == 0 ? 'hidden' : 'visible'}">{{equityProfit}}</span>
+                          </ion-col>
+                      </ion-row>
+                <ion-item *ngFor="let equityStrategyTrade of equityStrategyTrades" (click)="tradeTapped($event, equityStrategyTrade)">
+                    <h5>{{equityStrategyTrade.direction}}
+                    {{equityStrategyTrade.ticker}}
+                    <span [ngStyle]="{'font-weight': 'bold', 'color': equityStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityStrategyTrade.percentChange}}%</span></h5>
+                    </ion-item>
+            </ion-list>
+            <ion-list *ngSwitchCase="'forexStrategyTrades'">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                      Total Trades: {{totalCount}}
+                    </ion-col>
+                    <ion-col>
+                      Profitable: {{totalProfitable}}%
+                    </ion-col>
+                    <ion-col>
+                        Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': totalProfit >= 0 ? 'green' : 'red'}">{{totalProfit}}</span>
+                      </ion-col>
+                  </ion-row>
+
+                <ion-row>
+              <ion-col>
+                Total Forex: <span [ngStyle]="{'visibility': forexCount == 0 ? 'hidden' : 'visible' }">{{forexCount}}</span>
               </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              Total Equity: <span [ngStyle]="{'visibility': equityCount == 0 ? 'hidden' : 'visible' }">{{equityCount}}</span>
-            </ion-col>
-            <ion-col>
-                Profitable: <span [ngStyle]="{'visibility': equityCount == 0 ? 'hidden' : 'visible' }">{{equityProfitable}}%</span>
-            </ion-col>
-            <ion-col>
-                Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': equityProfit >= 0 ? 'green' : 'red', 'visibility': equityCount == 0 ? 'hidden' : 'visible'}">{{equityProfit}}</span>
+              <ion-col>
+            Profitable: <span [ngStyle]="{'visibility': forexCount == 0 ? 'hidden' : 'visible' }">{{forexProfitable}}%</span>
               </ion-col>
-          </ion-row>
-          <ion-row>
+              <ion-col>
+                  Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': forexProfit >= 0 ? 'green' : 'red', 'visibility': cryptoCount == 0 ? 'hidden' : 'visible'}">{{forexProfit}}</span>
+                </ion-col>
+            </ion-row>
+          </ion-grid>
+                    <ion-item *ngFor="let forexStrategyTrade of forexStrategyTrades" (click)="tradeTapped($event, forexStrategyTrade)">
+                        <h5>{{forexStrategyTrade.direction}}
+                        {{forexStrategyTrade.ticker}}
+                        <span [ngStyle]="{'font-weight': 'bold', 'color': forexStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{forexStrategyTrade.percentChange}}%</span></h5>
+                  </ion-item>
+                  </ion-list>              
+                  
+                  
+
+
+              <ion-list *ngSwitchCase="'cryptoStrategyTrades'">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                      Total Trades: {{totalCount}}
+                    </ion-col>
+                    <ion-col>
+                      Profitable: {{totalProfitable}}%
+                    </ion-col>
+                    <ion-col>
+                        Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': totalProfit >= 0 ? 'green' : 'red'}">{{totalProfit}}</span>
+                      </ion-col>
+                  </ion-row>
+
+                <ion-row>
               <ion-col>
                 Total Crypto: <span [ngStyle]="{'visibility': cryptoCount == 0 ? 'hidden' : 'visible' }">{{cryptoCount}}</span>
               </ion-col>
@@ -40,33 +116,17 @@
                   Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': cryptoProfit >= 0 ? 'green' : 'red', 'visibility': cryptoCount == 0 ? 'hidden' : 'visible'}">{{cryptoProfit}}</span>
                 </ion-col>
             </ion-row>
-            <ion-row>
-            <ion-col>
-                <ion-list-header>Equity Trades</ion-list-header>
-            </ion-col>
-            <ion-col>
-                <ion-list-header>Crypto Trades</ion-list-header>
-            </ion-col>
-          </ion-row>
           </ion-grid>
-          <ion-content>
-            <ion-grid>
-          <ion-row>
-            <ion-col>
-                <ion-item *ngFor="let equityStrategyTrade of equityStrategyTrades" (click)="tradeTapped($event, equityStrategyTrade)">
-                    <h5>{{equityStrategyTrade.direction}}
-                    {{equityStrategyTrade.ticker}}
-                    <span [ngStyle]="{'font-weight': 'bold', 'color': equityStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityStrategyTrade.percentChange}}%</span></h5>
-                    </ion-item>
-            </ion-col>
-            <ion-col>
-                <ion-item *ngFor="let cryptoStrategyTrade of cryptoStrategyTrades" (click)="tradeTapped($event, cryptoStrategyTrade)">
-                    <h5>{{cryptoStrategyTrade.direction}}
-                    {{cryptoStrategyTrade.ticker}}
-                    <span [ngStyle]="{'font-weight': 'bold', 'color': cryptoStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoStrategyTrade.percentChange}}%</span></h5>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+                    <ion-item *ngFor="let cryptoStrategyTrade of cryptoStrategyTrades" (click)="tradeTapped($event, cryptoStrategyTrade)">
+                        <h5>{{cryptoStrategyTrade.direction}}
+                        {{cryptoStrategyTrade.ticker}}
+                        <span [ngStyle]="{'font-weight': 'bold', 'color': cryptoStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoStrategyTrade.percentChange}}%</span></h5>
+                  </ion-item>
+                  </ion-list>
+    
+    
+
+
+</div>
   </ion-content>
   

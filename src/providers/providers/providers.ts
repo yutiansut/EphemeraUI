@@ -11,6 +11,8 @@ export class ProvidersProvider {
   public EQUITY_TRADE_SIGNALS  = this.API + '/equity-trade-signals';
   public CRYPTO_TRADES  = this.API + '/crypto-trades';
   public CRYPTO_TRADE_SIGNALS  = this.API + '/crypto-trade-signals';
+  public FOREX_TRADES = this.API + '/forex-trades';
+  public FOREX_TRADE_SIGNALS  = this.API + '/forex-trade-signals';
   public PNL  = this.API + '/pnl';
 
   constructor(public http: HttpClient) {
@@ -24,13 +26,23 @@ getAllCryptoTrades(): Observable<any>{
   return this.http.get(this.CRYPTO_TRADES + "/all")
 }
 
+getAllForexTrades(): Observable<any>{
+  return this.http.get(this.FOREX_TRADES + "/all")
+}
+
 getOpenEquityTrades(): Observable<any>{
   return this.http.get(this.EQUITY_TRADES + "/open")
 }
 
 getClosedEquityTrades(): Observable<any> {
   return this.http.get(this.EQUITY_TRADES + "/closed")
+}
+getOpenForexTrades(): Observable<any>{
+  return this.http.get(this.FOREX_TRADES + "/open")
+}
 
+getClosedForexTrades(): Observable<any> {
+  return this.http.get(this.FOREX_TRADES + "/closed")
 }
 
 getOpenCryptoTrades(): Observable<any>{
@@ -49,13 +61,20 @@ getAllCryptoTradeSignals(): Observable<any>{
   return this.http.get(this.CRYPTO_TRADE_SIGNALS + "/all")
 }
 
+getAllForexTradeSignals(): Observable<any>{
+  return this.http.get(this.FOREX_TRADE_SIGNALS + "/all")
+}
+
 getEquityTradesBySymbol(ticker): Observable<any>{
   return this.http.get(this.EQUITY_TRADES + "/tickers/" + ticker)
 }
 
 getCryptoTradesBySymbol(ticker): Observable<any>{
   return this.http.get(this.CRYPTO_TRADES + "/tickers/" + ticker)
+}
 
+getForexTradesBySymbol(ticker): Observable<any>{
+  return this.http.get(this.FOREX_TRADES + "/tickers/" + ticker)
 }
 
 getEquityTradesByStrategy(strategy): Observable<any>{
@@ -66,12 +85,20 @@ getCryptoTradesByStrategy(strategy): Observable<any>{
   return this.http.get(this.CRYPTO_TRADES + "/strategies/" + strategy)
 }
 
+getForexTradesByStrategy(strategy): Observable<any>{
+  return this.http.get(this.FOREX_TRADES + "/strategies/" + strategy)
+}
+
 getEquityTradesByTicker(): Observable<any>{
   return this.http.get(this.EQUITY_TRADES + "/tickers")
 }
 
 getCryptoTradesByTicker(): Observable<any>{
   return this.http.get(this.CRYPTO_TRADES + "/tickers")
+}
+
+getForexTradesByTicker(): Observable<any>{
+  return this.http.get(this.FOREX_TRADES + "/tickers")
 }
 
 getAllStrategies(): Observable<any>{

@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import { ProvidersProvider } from '../../providers/providers/providers';
 import { TradePage } from '../trade/trade';
 
@@ -12,11 +12,14 @@ import { TradePage } from '../trade/trade';
 })
 export class ClosedTradesPage {
 
-
+  closedtrades: string = "closedtrades";
   equityClosedTrades : any;
+  forexClosedTrades : any;
   cryptoClosedTrades : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public provider : ProvidersProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public provider : ProvidersProvider, public platform: Platform) {
+    this.closedtrades = "equityClosedTrades";
+  
   }
 
   ngOnInit(){
@@ -26,9 +29,12 @@ export class ClosedTradesPage {
   async getTrades(){
     const response =  await this.provider.getClosedEquityTrades().toPromise();
     const response1 = await this.provider.getClosedCryptoTrades().toPromise();
+    const response2 = await this.provider.getClosedForexTrades().toPromise();
     this.equityClosedTrades = response;
     this.cryptoClosedTrades = response1;
+    this.forexClosedTrades = response2;
     this.equityClosedTrades = await this.equityClosedTrades.sort(this.compare);
+    this.forexClosedTrades = await this.forexClosedTrades.sort(this.compare)
     this.cryptoClosedTrades = await this.cryptoClosedTrades.sort(this.compare)
   }
 

@@ -62,27 +62,57 @@ var TickersPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.provider = provider;
+        this.tickers = "tickers";
+        this.tickers = "equityTickers";
     }
     TickersPage.prototype.ngOnInit = function () {
         this.getInfo();
     };
     TickersPage.prototype.getInfo = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var response, response1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var response, response1, response2, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0: return [4 /*yield*/, this.provider.getEquityTradesByTicker().toPromise()];
                     case 1:
-                        response = _a.sent();
+                        response = _d.sent();
                         return [4 /*yield*/, this.provider.getCryptoTradesByTicker().toPromise()];
                     case 2:
-                        response1 = _a.sent();
+                        response1 = _d.sent();
+                        return [4 /*yield*/, this.provider.getForexTradesByTicker().toPromise()];
+                    case 3:
+                        response2 = _d.sent();
                         this.equityTickers = response;
                         this.cryptoTickers = response1;
+                        this.forexTickers = response2;
+                        _a = this;
+                        return [4 /*yield*/, this.equityTickers.sort(this.compare)];
+                    case 4:
+                        _a.equityTickers = _d.sent();
+                        _b = this;
+                        return [4 /*yield*/, this.cryptoTickers.sort(this.compare)];
+                    case 5:
+                        _b.cryptoTickers = _d.sent();
+                        _c = this;
+                        return [4 /*yield*/, this.forexTickers.sort(this.compare)];
+                    case 6:
+                        _c.forexTickers = _d.sent();
                         return [2 /*return*/];
                 }
             });
         });
+    };
+    TickersPage.prototype.compare = function (a, b) {
+        var tradeA = a.name;
+        var tradeB = b.name;
+        var comparison = 0;
+        if (tradeA > tradeB) {
+            comparison = 1;
+        }
+        else if (tradeA < tradeB) {
+            comparison = -1;
+        }
+        return comparison;
     };
     TickersPage.prototype.equityTickerTapped = function ($event, equityTicker) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__ticker_ticker__["a" /* TickerPage */], equityTicker);
@@ -90,9 +120,12 @@ var TickersPage = /** @class */ (function () {
     TickersPage.prototype.cryptoTickerTapped = function ($event, cryptoTicker) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__ticker_ticker__["a" /* TickerPage */], cryptoTicker);
     };
+    TickersPage.prototype.forexTickerTapped = function ($event, forexTicker) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__ticker_ticker__["a" /* TickerPage */], forexTicker);
+    };
     TickersPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-tickers',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/tickers/tickers.html"*/'\n<ion-header>\n\n  <ion-navbar color = "secondary">\n    <ion-title>Symbols</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <ion-list-header text-center>Equities</ion-list-header>\n      </ion-col>\n      <ion-col>  \n        <ion-list-header text-center>Crypto</ion-list-header>\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col>\n        <ion-list>\n          <ion-item *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">\n            {{equityTicker.name}}\n          </ion-item>\n        </ion-list>\n      </ion-col>\n\n    <ion-col>\n      <ion-list>\n        <ion-item *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">\n        {{cryptoTicker.name}}\n        </ion-item>\n      </ion-list>\n    </ion-col>\n  </ion-row>\n</ion-grid>\n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/tickers/tickers.html"*/,
+            selector: 'page-tickers',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/tickers/tickers.html"*/'\n<ion-header>\n    <ion-navbar color = "secondary">\n      <ion-title>Closed Trades</ion-title>\n    </ion-navbar>\n    <ion-toolbar no-border-top>\n      <ion-segment [(ngModel)]="tickers">\n        <ion-segment-button value = \'equityTickers\'>\n          Equity\n        </ion-segment-button>\n        <ion-segment-button value = \'forexTickers\'>\n          Forex\n        </ion-segment-button>\n        <ion-segment-button value = \'cryptoTickers\'>\n          Crypto\n        </ion-segment-button>\n      </ion-segment>\n    </ion-toolbar>\n  </ion-header>\n\n\n  <ion-content>\n      <div [ngSwitch]="tickers">\n        <ion-list *ngSwitchCase="\'equityTickers\'">\n          <ion-item *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">\n            {{equityTicker.name}}\n          </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'forexTickers\'">\n            <ion-item *ngFor="let forexTicker of forexTickers" ion-item (click)="forexTickerTapped($event, forexTicker)">\n            {{forexTicker.name}}\n            </ion-item>\n          </ion-list>\n\n      <ion-list *ngSwitchCase="\'cryptoTickers\'">\n        <ion-item *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">\n        {{cryptoTicker.name}}\n        </ion-item>\n        </ion-list>\n\n      </div>\n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/tickers/tickers.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0__providers_providers_providers__["a" /* ProvidersProvider */]])
     ], TickersPage);
@@ -161,35 +194,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 var ClosedTradesPage = /** @class */ (function () {
-    function ClosedTradesPage(navCtrl, navParams, provider) {
+    function ClosedTradesPage(navCtrl, navParams, provider, platform) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.provider = provider;
+        this.platform = platform;
+        this.closedtrades = "closedtrades";
+        this.closedtrades = "equityClosedTrades";
     }
     ClosedTradesPage.prototype.ngOnInit = function () {
         this.getTrades();
     };
     ClosedTradesPage.prototype.getTrades = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var response, response1, _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var response, response1, response2, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0: return [4 /*yield*/, this.provider.getClosedEquityTrades().toPromise()];
                     case 1:
-                        response = _c.sent();
+                        response = _d.sent();
                         return [4 /*yield*/, this.provider.getClosedCryptoTrades().toPromise()];
                     case 2:
-                        response1 = _c.sent();
+                        response1 = _d.sent();
+                        return [4 /*yield*/, this.provider.getClosedForexTrades().toPromise()];
+                    case 3:
+                        response2 = _d.sent();
                         this.equityClosedTrades = response;
                         this.cryptoClosedTrades = response1;
+                        this.forexClosedTrades = response2;
                         _a = this;
                         return [4 /*yield*/, this.equityClosedTrades.sort(this.compare)];
-                    case 3:
-                        _a.equityClosedTrades = _c.sent();
-                        _b = this;
-                        return [4 /*yield*/, this.cryptoClosedTrades.sort(this.compare)];
                     case 4:
-                        _b.cryptoClosedTrades = _c.sent();
+                        _a.equityClosedTrades = _d.sent();
+                        _b = this;
+                        return [4 /*yield*/, this.forexClosedTrades.sort(this.compare)];
+                    case 5:
+                        _b.forexClosedTrades = _d.sent();
+                        _c = this;
+                        return [4 /*yield*/, this.cryptoClosedTrades.sort(this.compare)];
+                    case 6:
+                        _c.cryptoClosedTrades = _d.sent();
                         return [2 /*return*/];
                 }
             });
@@ -212,9 +256,9 @@ var ClosedTradesPage = /** @class */ (function () {
     };
     ClosedTradesPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-closed-trades',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/closed-trades/closed-trades.html"*/'\n<ion-header>\n\n  <ion-navbar color = "secondary">\n    <ion-title>Closed Trades</ion-title>\n  </ion-navbar>\n\n</ion-header>\n<ion-content >\n      <ion-grid>\n          <ion-row>\n            <ion-col>\n                <ion-list-header>Equity Trades</ion-list-header>\n            </ion-col>\n            <ion-col>\n                <ion-list-header>Crypto Trades</ion-list-header>\n            </ion-col>\n          </ion-row>\n          </ion-grid>\n<ion-content>\n      <ion-grid>\n          <ion-row>\n            <ion-col>\n                <ion-item *ngFor="let equityClosedTrade of equityClosedTrades" (click)="closedTradeTapped($event, equityClosedTrade)">\n                    <h5>{{equityClosedTrade.direction}}\n                   {{equityClosedTrade.ticker}}\n                    <span [ngStyle]="{\'font-weight\': \'bold\', \'color\': equityClosedTrade.percentChange >= 0 ? \'green\' : \'red\'}">{{equityClosedTrade.percentChange}}%</span></h5>\n                    </ion-item>\n            </ion-col>\n            <ion-col>\n                <ion-item *ngFor="let cryptoClosedTrade of cryptoClosedTrades" (click)="closedTradeTapped($event, cryptoClosedTrade)">\n                    <h5>{{cryptoClosedTrade.direction}}\n                    {{cryptoClosedTrade.ticker}}\n                    <span [ngStyle]="{\'font-weight\': \'bold\', \'color\': cryptoClosedTrade.percentChange >= 0 ? \'green\' : \'red\'}">{{cryptoClosedTrade.percentChange}}%</span></h5>\n              </ion-item>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/closed-trades/closed-trades.html"*/,
+            selector: 'page-closed-trades',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/closed-trades/closed-trades.html"*/'\n<ion-header>\n  <ion-navbar color = "secondary">\n    <ion-title>Closed Trades</ion-title>\n  </ion-navbar>\n  <ion-toolbar no-border-top>\n    <ion-segment [(ngModel)]="closedtrades">\n      <ion-segment-button value = \'equityClosedTrades\'>\n        Equity\n      </ion-segment-button>\n      <ion-segment-button value = \'forexClosedTrades\'>\n        Forex\n      </ion-segment-button>\n      <ion-segment-button value = \'cryptoClosedTrades\'>\n        Crypto\n      </ion-segment-button>\n    </ion-segment>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div [ngSwitch]="closedtrades">\n    <ion-list *ngSwitchCase="\'equityClosedTrades\'">\n                <ion-item *ngFor="let equityClosedTrade of equityClosedTrades" (click)="closedTradeTapped($event, equityClosedTrade)">\n                    <h5>{{equityClosedTrade.direction}}\n                   {{equityClosedTrade.ticker}}\n                    <span [ngStyle]="{\'font-weight\': \'bold\', \'color\': equityClosedTrade.percentChange >= 0 ? \'green\' : \'red\'}">{{equityClosedTrade.percentChange}}%</span></h5>\n                </ion-item>\n      </ion-list>\n      <ion-list *ngSwitchCase="\'forexClosedTrades\'">\n          <ion-item *ngFor="let forexClosedTrade of forexClosedTrades" (click)="closedTradeTapped($event, forexClosedTrade)">\n              <h5>{{forexClosedTrade.direction}}\n              {{forexClosedTrade.pair}}\n              <span [ngStyle]="{\'font-weight\': \'bold\', \'color\': forexClosedTrade.percentChange >= 0 ? \'green\' : \'red\'}">{{forexClosedTrade.percentChange}}%</span></h5>\n              </ion-item>\n      </ion-list>\n      <ion-list *ngSwitchCase="\'cryptoClosedTrades\'">\n                <ion-item *ngFor="let cryptoClosedTrade of cryptoClosedTrades" (click)="closedTradeTapped($event, cryptoClosedTrade)">\n                    <h5>{{cryptoClosedTrade.direction}}\n                    {{cryptoClosedTrade.ticker}}\n                    <span [ngStyle]="{\'font-weight\': \'bold\', \'color\': cryptoClosedTrade.percentChange >= 0 ? \'green\' : \'red\'}">{{cryptoClosedTrade.percentChange}}%</span></h5>\n                    </ion-item>\n      </ion-list>\n</div>\n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/closed-trades/closed-trades.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__["a" /* ProvidersProvider */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__["a" /* ProvidersProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */]])
     ], ClosedTradesPage);
     return ClosedTradesPage;
 }());
@@ -285,13 +329,15 @@ var OpenTradesPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.provider = provider;
+        this.opentrades = "opentrades";
+        this.opentrades = "equityOpenTrades";
     }
     OpenTradesPage.prototype.ngOnInit = function () {
         this.getTrades();
     };
     OpenTradesPage.prototype.getTrades = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var response, response1;
+            var response, response1, response2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.provider.getOpenEquityTrades().toPromise()];
@@ -300,25 +346,33 @@ var OpenTradesPage = /** @class */ (function () {
                         return [4 /*yield*/, this.provider.getOpenCryptoTrades().toPromise()];
                     case 2:
                         response1 = _a.sent();
+                        return [4 /*yield*/, this.provider.getOpenForexTrades().toPromise()];
+                    case 3:
+                        response2 = _a.sent();
                         this.equityOpenTrades = response;
                         this.cryptoOpenTrades = response1;
-                        return [4 /*yield*/, this.directionSplit(response, response1)];
-                    case 3:
+                        this.forexOpenTrades = response2;
+                        return [4 /*yield*/, this.directionSplit(response, response1, response2)];
+                    case 4:
                         _a.sent();
                         this.equityShort = this.equityShort.sort(this.compare);
                         this.equityLong = this.equityLong.sort(this.compare);
                         this.cryptoShort = this.cryptoShort.sort(this.compare);
                         this.cryptoLong = this.cryptoLong.sort(this.compare);
+                        this.forexShort = this.forexShort.sort(this.compare);
+                        this.forexLong = this.forexLong.sort(this.compare);
                         return [2 /*return*/];
                 }
             });
         });
     };
-    OpenTradesPage.prototype.directionSplit = function (data, data1) {
+    OpenTradesPage.prototype.directionSplit = function (data, data1, data2) {
         this.equityShort = data.filter(function (trade) { return trade.direction == "SHORT"; });
         this.equityLong = data.filter(function (trade) { return trade.direction == "LONG"; });
         this.cryptoShort = data1.filter(function (trade) { return trade.direction == "SHORT"; });
         this.cryptoLong = data1.filter(function (trade) { return trade.direction == "LONG"; });
+        this.forexShort = data2.filter(function (trade) { return trade.direction == "SHORT"; });
+        this.forexLong = data2.filter(function (trade) { return trade.direction == "LONG"; });
     };
     OpenTradesPage.prototype.compare = function (a, b) {
         var tradeA = a.id;
@@ -337,7 +391,7 @@ var OpenTradesPage = /** @class */ (function () {
     };
     OpenTradesPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-open-trades',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/open-trades/open-trades.html"*/'\n<ion-header>\n\n  <ion-navbar color = "secondary">\n    <ion-title>Open Trades</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n    <ion-grid>\n        <ion-row>\n          <ion-col>\n              <ion-list-header text-center>Equity Trades</ion-list-header>\n          </ion-col>\n          <ion-col>\n              <ion-list-header text-center>Crypto Trades</ion-list-header>\n          </ion-col>\n        </ion-row>\n        </ion-grid>\n<ion-content>\n        <ion-grid>\n        <ion-row>\n          <ion-col>\n              <ion-list-header [ngStyle]="{\'font-size\': \'9px\'}">Long</ion-list-header>\n              <ion-item *ngFor="let equityLong of equityLong" (click)="openTradeTapped($event, equityLong)">\n                  <h5>{{equityLong.ticker}} - \n                  {{equityLong.strategy1}}</h5>\n                  </ion-item>\n\n                  <br><br>\n              <ion-list-header [ngStyle]="{\'font-size\': \'9px\'}">Short</ion-list-header>    \n              <ion-item *ngFor="let equityShort of equityShort" (click)="openTradeTapped($event, equityShort)">\n                      <h5>{{equityShort.ticker}} - \n                      {{equityShort.strategy1}}</h5>\n                      </ion-item>\n          </ion-col>\n          <ion-col>\n              <ion-list-header [ngStyle]="{\'font-size\': \'9px\'}">Long</ion-list-header>\n              <ion-item *ngFor="let cryptoLong of cryptoLong" (click)="openTradeTapped($event, cryptoLong)">\n                  <h5>{{cryptoLong.ticker}} - \n                  {{cryptoLong.strategy1}}</h5>\n            </ion-item>\n\n            <br><br>\n            <ion-list-header [ngStyle]="{\'font-size\': \'9px\'}">Short</ion-list-header>    \n            <ion-item *ngFor="let cryptoShort of cryptoShort" (click)="openTradeTapped($event, cryptoShort)">\n                    <h5>{{cryptoShort.ticker}} - \n                    {{cryptoShort.strategy1}}</h5>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n\n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/open-trades/open-trades.html"*/,
+            selector: 'page-open-trades',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/open-trades/open-trades.html"*/'\n<ion-header>\n        <ion-navbar color = "secondary">\n          <ion-title>Open Trades</ion-title>\n        </ion-navbar>\n        <ion-toolbar no-border-top>\n          <ion-segment [(ngModel)]="opentrades">\n            <ion-segment-button value = \'equityOpenTrades\'>\n              Equity\n            </ion-segment-button>\n            <ion-segment-button value = \'forexOpenTrades\'>\n              Forex\n            </ion-segment-button>\n            <ion-segment-button value = \'cryptoOpenTrades\'>\n              Crypto\n            </ion-segment-button>\n          </ion-segment>\n        </ion-toolbar>\n      </ion-header>\n\n\n<ion-content>\n        <div [ngSwitch]="opentrades">\n            <ion-list *ngSwitchCase="\'equityOpenTrades\'">\n              <ion-list-header>Long</ion-list-header>\n              <ion-item *ngFor="let equityLong of equityLong" (click)="openTradeTapped($event, equityLong)">\n                  <h5>{{equityLong.ticker}} - \n                  {{equityLong.strategy1}}</h5>\n                  </ion-item>\n              <ion-list-header>Short</ion-list-header>    \n              <ion-item *ngFor="let equityShort of equityShort" (click)="openTradeTapped($event, equityShort)">\n                      <h5>{{equityShort.ticker}} - \n                      {{equityShort.strategy1}}</h5>\n                </ion-item>\n            </ion-list>\n\n\n        <ion-list *ngSwitchCase="\'forexOpenTrades\'">\n                <ion-list-header>Long</ion-list-header>\n                <ion-item *ngFor="let forexLong of forexLong" (click)="openTradeTapped($event, forexLong)">\n                    <h5>{{forexLong.pair}} - \n                    {{forexLong.strategy1}}</h5>\n              </ion-item>\n  \n              <ion-list-header>Short</ion-list-header>    \n              <ion-item *ngFor="let forexShort of forexShort" (click)="openTradeTapped($event, forexShort)">\n                      <h5>{{forexShort.pair}} - \n                      {{forexShort.strategy1}}</h5>\n              </ion-item>\n          </ion-list>\n\n        <ion-list *ngSwitchCase="\'cryptoOpenTrades\'">\n              <ion-list-header>Long</ion-list-header>\n              <ion-item *ngFor="let cryptoLong of cryptoLong" (click)="openTradeTapped($event, cryptoLong)">\n                  <h5>{{cryptoLong.ticker}} - \n                  {{cryptoLong.strategy1}}</h5>\n            </ion-item>\n\n            <ion-list-header>Short</ion-list-header>    \n            <ion-item *ngFor="let cryptoShort of cryptoShort" (click)="openTradeTapped($event, cryptoShort)">\n                    <h5>{{cryptoShort.ticker}} - \n                    {{cryptoShort.strategy1}}</h5>\n            </ion-item>\n        </ion-list>\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/open-trades/open-trades.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__node_modules_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__node_modules_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_providers_providers__["a" /* ProvidersProvider */]])
     ], OpenTradesPage);
@@ -407,10 +461,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 var StatisticsPage = /** @class */ (function () {
-    // lineChart1: any;
-    // linechart1Input: any;
-    // linechart1Data: any;
-    // linechart1Labels: any;
     function StatisticsPage(navCtrl, navParams, provider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -420,9 +470,11 @@ var StatisticsPage = /** @class */ (function () {
         this.getTotalProfitChart();
         this.getTotalEquityProfitChart();
         this.getTotalCryptoProfitChart();
+        this.getTotalForexProfitChart();
         this.getDailyProfitChart();
         this.getDailyEquityChart();
         this.getDailyCryptoChart();
+        this.getDailyForexChart();
     };
     StatisticsPage.prototype.getTotalProfitChart = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -640,6 +692,78 @@ var StatisticsPage = /** @class */ (function () {
             });
         });
     };
+    StatisticsPage.prototype.getTotalForexProfitChart = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0: return [4 /*yield*/, this.provider.getAllPnL().toPromise()];
+                    case 1:
+                        response = _d.sent();
+                        _a = this;
+                        return [4 /*yield*/, response.sort(this.compare)];
+                    case 2:
+                        _a.linechartInput = _d.sent();
+                        _b = this;
+                        return [4 /*yield*/, this.linechartInput.map(function (e) {
+                                return e.date;
+                            })];
+                    case 3:
+                        _b.linechartLabels = _d.sent();
+                        _c = this;
+                        return [4 /*yield*/, this.linechartInput.map(function (e) {
+                                return e.runningForex;
+                            })];
+                    case 4:
+                        _c.linechartData = _d.sent();
+                        ;
+                        this.lineChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js__["Chart"](this.lineCanvas3.nativeElement, {
+                            type: 'line',
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltips: {
+                                    callbacks: {
+                                        label: function (tooltipItem) {
+                                            return tooltipItem.yLabel;
+                                        }
+                                    }
+                                }
+                            },
+                            data: {
+                                labels: this.linechartLabels,
+                                datasets: [
+                                    {
+                                        label: "Total Forex Profit",
+                                        fill: false,
+                                        lineTension: 0.1,
+                                        backgroundColor: "rgba(75,192,192,0.4)",
+                                        borderColor: "rgba(75,192,192,1)",
+                                        borderCapStyle: 'butt',
+                                        borderDash: [],
+                                        borderDashOffset: 0.0,
+                                        borderJoinStyle: 'miter',
+                                        pointBorderColor: "rgba(75,192,192,1)",
+                                        pointBackgroundColor: "#fff",
+                                        pointBorderWidth: 1,
+                                        pointHoverRadius: 5,
+                                        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                                        pointHoverBorderColor: "rgba(220,220,220,1)",
+                                        pointHoverBorderWidth: 2,
+                                        pointRadius: 1,
+                                        pointHitRadius: 10,
+                                        data: this.linechartData,
+                                        spanGaps: false,
+                                    }
+                                ]
+                            }
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     StatisticsPage.prototype.getDailyProfitChart = function () {
         return __awaiter(this, void 0, void 0, function () {
             var response, _a, _b, _c;
@@ -823,6 +947,67 @@ var StatisticsPage = /** @class */ (function () {
             });
         });
     };
+    StatisticsPage.prototype.getDailyForexChart = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0: return [4 /*yield*/, this.provider.getAllPnL().toPromise()];
+                    case 1:
+                        response = _d.sent();
+                        _a = this;
+                        return [4 /*yield*/, response.sort(this.compare)];
+                    case 2:
+                        _a.linechartInput = _d.sent();
+                        _b = this;
+                        return [4 /*yield*/, this.linechartInput.map(function (e) {
+                                return e.date;
+                            })];
+                    case 3:
+                        _b.linechartLabels = _d.sent();
+                        _c = this;
+                        return [4 /*yield*/, this.linechartInput.map(function (e) {
+                                return e.forexProfit;
+                            })];
+                    case 4:
+                        _c.linechartData = _d.sent();
+                        ;
+                        this.lineChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js__["Chart"](this.barCanvas3.nativeElement, {
+                            type: 'bar',
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltips: {
+                                    callbacks: {
+                                        label: function (tooltipItem) {
+                                            return tooltipItem.yLabel;
+                                        }
+                                    }
+                                }
+                            },
+                            data: {
+                                labels: this.linechartLabels,
+                                datasets: [
+                                    {
+                                        label: "Daily Forex Profit",
+                                        fill: false,
+                                        backgroundColor: "rgba(75,192,192,0.4)",
+                                        borderColor: "rgba(75,192,192,1)",
+                                        borderWidth: 1,
+                                        hoverBackgroundColor: "rgba(75,192,192,1)",
+                                        hoverBorderColor: "rgba(220,220,220,1)",
+                                        hoverBorderWidth: 2,
+                                        data: this.linechartData,
+                                    }
+                                ]
+                            }
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     StatisticsPage.prototype.ionViewDidLoad = function () {
     };
     StatisticsPage.prototype.compare = function (a, b) {
@@ -850,6 +1035,10 @@ var StatisticsPage = /** @class */ (function () {
         __metadata("design:type", Object)
     ], StatisticsPage.prototype, "lineCanvas2", void 0);
     __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_8" /* ViewChild */])('lineCanvas3'),
+        __metadata("design:type", Object)
+    ], StatisticsPage.prototype, "lineCanvas3", void 0);
+    __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_8" /* ViewChild */])('barCanvas'),
         __metadata("design:type", Object)
     ], StatisticsPage.prototype, "barCanvas", void 0);
@@ -861,9 +1050,13 @@ var StatisticsPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_8" /* ViewChild */])('barCanvas2'),
         __metadata("design:type", Object)
     ], StatisticsPage.prototype, "barCanvas2", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_8" /* ViewChild */])('barCanvas3'),
+        __metadata("design:type", Object)
+    ], StatisticsPage.prototype, "barCanvas3", void 0);
     StatisticsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-statistics',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/statistics/statistics.html"*/'\n<ion-header>\n  <ion-navbar color = "secondary">\n    <ion-title text-center>Statistics</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n          <ion-card>\n      <h2 text-center>Total Profit</h2>\n      <canvas #lineCanvas></canvas>\n      </ion-card>\n  </ion-col>\n  <ion-col>\n      <ion-card>\n      <h2 text-center>Daily Profit</h2>\n      <canvas #barCanvas></canvas>\n      </ion-card>\n  </ion-col>\n  </ion-row>\n \n\n<ion-row>\n  <ion-col>\n  <ion-card>\n  <h2 text-center>Total Equity Profit</h2>\n  <canvas #lineCanvas1></canvas>\n  </ion-card>\n  </ion-col>\n  <ion-col>\n      <ion-card>\n      <h2 text-center>Daily Equity Profit</h2>\n      <canvas #barCanvas1></canvas>\n      </ion-card>\n  </ion-col>\n  </ion-row>\n\n<ion-row>\n    <ion-col>\n    <ion-card>\n    <h2 text-center>Total Crypto Profit</h2>\n    <canvas #lineCanvas2></canvas>\n    </ion-card>\n    </ion-col>\n    <ion-col>\n        <ion-card>\n        <h2 text-center>Daily Crypto Profit</h2>\n        <canvas #barCanvas2></canvas>\n        </ion-card>\n    </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/statistics/statistics.html"*/,
+            selector: 'page-statistics',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/statistics/statistics.html"*/'\n<ion-header>\n  <ion-navbar color = "secondary">\n    <ion-title text-center>Statistics</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n          <ion-card>\n      <h2 text-center>Total Profit</h2>\n      <canvas #lineCanvas></canvas>\n      </ion-card>\n  </ion-col>\n  <ion-col>\n      <ion-card>\n      <h2 text-center>Daily Profit</h2>\n      <canvas #barCanvas></canvas>\n      </ion-card>\n  </ion-col>\n  </ion-row>\n \n\n<ion-row>\n  <ion-col>\n  <ion-card>\n  <h2 text-center>Total Equity Profit</h2>\n  <canvas #lineCanvas1></canvas>\n  </ion-card>\n  </ion-col>\n  <ion-col>\n      <ion-card>\n      <h2 text-center>Daily Equity Profit</h2>\n      <canvas #barCanvas1></canvas>\n      </ion-card>\n  </ion-col>\n  </ion-row>\n\n  <ion-row>\n    <ion-col>\n    <ion-card>\n    <h2 text-center>Total Forex Profit</h2>\n    <canvas #lineCanvas3></canvas>\n    </ion-card>\n    </ion-col>\n    <ion-col>\n        <ion-card>\n        <h2 text-center>Daily Forex Profit</h2>\n        <canvas #barCanvas3></canvas>\n        </ion-card>\n    </ion-col>\n    </ion-row>\n\n<ion-row>\n    <ion-col>\n    <ion-card>\n    <h2 text-center>Total Crypto Profit</h2>\n    <canvas #lineCanvas2></canvas>\n    </ion-card>\n    </ion-col>\n    <ion-col>\n        <ion-card>\n        <h2 text-center>Daily Crypto Profit</h2>\n        <canvas #barCanvas2></canvas>\n        </ion-card>\n    </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/statistics/statistics.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_providers_providers__["a" /* ProvidersProvider */]])
     ], StatisticsPage);
@@ -1007,6 +1200,8 @@ var ProvidersProvider = /** @class */ (function () {
         this.EQUITY_TRADE_SIGNALS = this.API + '/equity-trade-signals';
         this.CRYPTO_TRADES = this.API + '/crypto-trades';
         this.CRYPTO_TRADE_SIGNALS = this.API + '/crypto-trade-signals';
+        this.FOREX_TRADES = this.API + '/forex-trades';
+        this.FOREX_TRADE_SIGNALS = this.API + '/forex-trade-signals';
         this.PNL = this.API + '/pnl';
     }
     ProvidersProvider.prototype.getAllEquityTrades = function () {
@@ -1015,11 +1210,20 @@ var ProvidersProvider = /** @class */ (function () {
     ProvidersProvider.prototype.getAllCryptoTrades = function () {
         return this.http.get(this.CRYPTO_TRADES + "/all");
     };
+    ProvidersProvider.prototype.getAllForexTrades = function () {
+        return this.http.get(this.FOREX_TRADES + "/all");
+    };
     ProvidersProvider.prototype.getOpenEquityTrades = function () {
         return this.http.get(this.EQUITY_TRADES + "/open");
     };
     ProvidersProvider.prototype.getClosedEquityTrades = function () {
         return this.http.get(this.EQUITY_TRADES + "/closed");
+    };
+    ProvidersProvider.prototype.getOpenForexTrades = function () {
+        return this.http.get(this.FOREX_TRADES + "/open");
+    };
+    ProvidersProvider.prototype.getClosedForexTrades = function () {
+        return this.http.get(this.FOREX_TRADES + "/closed");
     };
     ProvidersProvider.prototype.getOpenCryptoTrades = function () {
         return this.http.get(this.CRYPTO_TRADES + "/open");
@@ -1033,11 +1237,17 @@ var ProvidersProvider = /** @class */ (function () {
     ProvidersProvider.prototype.getAllCryptoTradeSignals = function () {
         return this.http.get(this.CRYPTO_TRADE_SIGNALS + "/all");
     };
+    ProvidersProvider.prototype.getAllForexTradeSignals = function () {
+        return this.http.get(this.FOREX_TRADE_SIGNALS + "/all");
+    };
     ProvidersProvider.prototype.getEquityTradesBySymbol = function (ticker) {
         return this.http.get(this.EQUITY_TRADES + "/tickers/" + ticker);
     };
     ProvidersProvider.prototype.getCryptoTradesBySymbol = function (ticker) {
         return this.http.get(this.CRYPTO_TRADES + "/tickers/" + ticker);
+    };
+    ProvidersProvider.prototype.getForexTradesBySymbol = function (ticker) {
+        return this.http.get(this.FOREX_TRADES + "/tickers/" + ticker);
     };
     ProvidersProvider.prototype.getEquityTradesByStrategy = function (strategy) {
         return this.http.get(this.EQUITY_TRADES + "/strategies/" + strategy);
@@ -1045,11 +1255,17 @@ var ProvidersProvider = /** @class */ (function () {
     ProvidersProvider.prototype.getCryptoTradesByStrategy = function (strategy) {
         return this.http.get(this.CRYPTO_TRADES + "/strategies/" + strategy);
     };
+    ProvidersProvider.prototype.getForexTradesByStrategy = function (strategy) {
+        return this.http.get(this.FOREX_TRADES + "/strategies/" + strategy);
+    };
     ProvidersProvider.prototype.getEquityTradesByTicker = function () {
         return this.http.get(this.EQUITY_TRADES + "/tickers");
     };
     ProvidersProvider.prototype.getCryptoTradesByTicker = function () {
         return this.http.get(this.CRYPTO_TRADES + "/tickers");
+    };
+    ProvidersProvider.prototype.getForexTradesByTicker = function () {
+        return this.http.get(this.FOREX_TRADES + "/tickers");
     };
     ProvidersProvider.prototype.getAllStrategies = function () {
         return this.http.get(this.API + "/all");
@@ -1419,40 +1635,54 @@ var StrategyPage = /** @class */ (function () {
     };
     StrategyPage.prototype.getTrades = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var response, response1, _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var response, response1, response2, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0: return [4 /*yield*/, this.provider.getEquityTradesByStrategy(this.strategy.name).toPromise()];
                     case 1:
-                        response = _c.sent();
+                        response = _d.sent();
                         return [4 /*yield*/, this.provider.getCryptoTradesByStrategy(this.strategy.name).toPromise()];
                     case 2:
-                        response1 = _c.sent();
+                        response1 = _d.sent();
+                        return [4 /*yield*/, this.provider.getForexTradesByStrategy(this.strategy.name).toPromise()];
+                    case 3:
+                        response2 = _d.sent();
                         this.equityStrategyTrades = response;
                         this.cryptoStrategyTrades = response1;
-                        return [4 /*yield*/, this.getStats(response, response1)];
-                    case 3:
-                        _c.sent();
+                        this.forexStrategyTrades = response2;
+                        return [4 /*yield*/, this.getStats(response, response1, response2)];
+                    case 4:
+                        _d.sent();
+                        return [4 /*yield*/, this.getStartupView()];
+                    case 5:
+                        _d.sent();
                         _a = this;
                         return [4 /*yield*/, this.equityStrategyTrades.sort(this.compare)];
-                    case 4:
-                        _a.equityStrategyTrades = _c.sent();
+                    case 6:
+                        _a.equityStrategyTrades = _d.sent();
                         _b = this;
                         return [4 /*yield*/, this.cryptoStrategyTrades.sort(this.compare)];
-                    case 5:
-                        _b.cryptoStrategyTrades = _c.sent();
+                    case 7:
+                        _b.cryptoStrategyTrades = _d.sent();
+                        _c = this;
+                        return [4 /*yield*/, this.forexStrategyTrades.sort(this.compare)];
+                    case 8:
+                        _c.forexStrategyTrades = _d.sent();
                         return [2 /*return*/];
                 }
             });
         });
     };
-    StrategyPage.prototype.getStats = function (data, data1) {
+    StrategyPage.prototype.getStats = function (data, data1, data2) {
         var count = 0;
         var count1 = 0;
+        var count2 = 0;
         var tradesProfitable = 0;
         var tradesProfitable1 = 0;
+        var tradesProfitable2 = 0;
         var tradesProfit = 0;
         var tradesProfit1 = 0;
+        var tradesProfit2 = 0;
         for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
             var trade = data_1[_i];
             count++;
@@ -1469,15 +1699,36 @@ var StrategyPage = /** @class */ (function () {
                 tradesProfitable1++;
             }
         }
+        for (var _b = 0, data2_1 = data2; _b < data2_1.length; _b++) {
+            var trade = data2_1[_b];
+            count2++;
+            tradesProfit2 += (((trade.percentChange / 100) * trade.signalBuyPrice) * trade.amount);
+            if (trade.percentChange >= 0) {
+                tradesProfitable2++;
+            }
+        }
         this.equityCount = count;
         this.cryptoCount = count1;
-        this.totalCount = count + count1;
+        this.forexCount = count2;
+        this.totalCount = count + count1 + count2;
         this.equityProfitable = Math.round(((tradesProfitable / count) * 100) * 10) / 10;
         this.cryptoProfitable = Math.round(((tradesProfitable1 / count1) * 100) * 10) / 10;
-        this.totalProfitable = Math.round(((tradesProfitable + tradesProfitable1) / (count + count1) * 100) * 10) / 10;
+        this.forexProfitable = Math.round(((tradesProfitable2 / count2) * 100) * 10) / 10;
+        this.totalProfitable = Math.round(((tradesProfitable + tradesProfitable1 + tradesProfitable2) / (count + count1 + count2) * 100) * 10) / 10;
         this.equityProfit = +(tradesProfit.toFixed(2));
         this.cryptoProfit = +(tradesProfit1.toFixed(2));
-        this.totalProfit = +((tradesProfit + tradesProfit1).toFixed(2));
+        this.forexProfit = +(tradesProfit2.toFixed(2));
+        this.totalProfit = +((tradesProfit + tradesProfit1 + tradesProfit2).toFixed(2));
+    };
+    StrategyPage.prototype.getStartupView = function () {
+        if (this.equityCount > 0) {
+            this.closedtrades = "equityStrategyTrades";
+        }
+        else if (this.forexCount > 0) {
+            this.closedtrades = "forexStrategyTrades";
+        }
+        else
+            this.closedtrades = "cryptoStrategyTrades";
     };
     StrategyPage.prototype.compare = function (a, b) {
         var tradeA = a.id;
@@ -1496,7 +1747,7 @@ var StrategyPage = /** @class */ (function () {
     };
     StrategyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["m" /* Component */])({
-            selector: 'page-strategy',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/strategy/strategy.html"*/'\n<ion-header>\n\n    <ion-navbar color = "secondary">\n      <ion-title>{{strategy.name}}</ion-title>\n    </ion-navbar>\n  </ion-header>\n  <ion-content>\n      <ion-grid>\n          <ion-row>\n            <ion-col>\n              Total Trades: {{totalCount}}\n            </ion-col>\n            <ion-col>\n              Profitable: {{totalProfitable}}%\n            </ion-col>\n            <ion-col>\n                Profit: $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': totalProfit >= 0 ? \'green\' : \'red\'}">{{totalProfit}}</span>\n              </ion-col>\n          </ion-row>\n          <ion-row>\n            <ion-col>\n              Total Equity: <span [ngStyle]="{\'visibility\': equityCount == 0 ? \'hidden\' : \'visible\' }">{{equityCount}}</span>\n            </ion-col>\n            <ion-col>\n                Profitable: <span [ngStyle]="{\'visibility\': equityCount == 0 ? \'hidden\' : \'visible\' }">{{equityProfitable}}%</span>\n            </ion-col>\n            <ion-col>\n                Profit: $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': equityProfit >= 0 ? \'green\' : \'red\', \'visibility\': equityCount == 0 ? \'hidden\' : \'visible\'}">{{equityProfit}}</span>\n              </ion-col>\n          </ion-row>\n          <ion-row>\n              <ion-col>\n                Total Crypto: <span [ngStyle]="{\'visibility\': cryptoCount == 0 ? \'hidden\' : \'visible\' }">{{cryptoCount}}</span>\n              </ion-col>\n              <ion-col>\n            Profitable: <span [ngStyle]="{\'visibility\': cryptoCount == 0 ? \'hidden\' : \'visible\' }">{{cryptoProfitable}}%</span>\n              </ion-col>\n              <ion-col>\n                  Profit: $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': cryptoProfit >= 0 ? \'green\' : \'red\', \'visibility\': cryptoCount == 0 ? \'hidden\' : \'visible\'}">{{cryptoProfit}}</span>\n                </ion-col>\n            </ion-row>\n            <ion-row>\n            <ion-col>\n                <ion-list-header>Equity Trades</ion-list-header>\n            </ion-col>\n            <ion-col>\n                <ion-list-header>Crypto Trades</ion-list-header>\n            </ion-col>\n          </ion-row>\n          </ion-grid>\n          <ion-content>\n            <ion-grid>\n          <ion-row>\n            <ion-col>\n                <ion-item *ngFor="let equityStrategyTrade of equityStrategyTrades" (click)="tradeTapped($event, equityStrategyTrade)">\n                    <h5>{{equityStrategyTrade.direction}}\n                    {{equityStrategyTrade.ticker}}\n                    <span [ngStyle]="{\'font-weight\': \'bold\', \'color\': equityStrategyTrade.percentChange >= 0 ? \'green\' : \'red\'}">{{equityStrategyTrade.percentChange}}%</span></h5>\n                    </ion-item>\n            </ion-col>\n            <ion-col>\n                <ion-item *ngFor="let cryptoStrategyTrade of cryptoStrategyTrades" (click)="tradeTapped($event, cryptoStrategyTrade)">\n                    <h5>{{cryptoStrategyTrade.direction}}\n                    {{cryptoStrategyTrade.ticker}}\n                    <span [ngStyle]="{\'font-weight\': \'bold\', \'color\': cryptoStrategyTrade.percentChange >= 0 ? \'green\' : \'red\'}">{{cryptoStrategyTrade.percentChange}}%</span></h5>\n              </ion-item>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n  </ion-content>\n  '/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/strategy/strategy.html"*/,
+            selector: 'page-strategy',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/strategy/strategy.html"*/'\n<ion-header>\n\n    <ion-navbar color = "secondary">\n      <ion-title>{{strategy.name}}</ion-title>\n    </ion-navbar>\n    <ion-toolbar no-border-top>\n        <ion-segment [(ngModel)]="closedtrades">\n          <ion-segment-button value = \'equityStrategyTrades\'>\n            Equity\n          </ion-segment-button>\n          <ion-segment-button value = \'forexStrategyTrades\'>\n            Forex\n          </ion-segment-button>\n          <ion-segment-button value = \'cryptoStrategyTrades\'>\n            Crypto\n          </ion-segment-button>\n        </ion-segment>\n      </ion-toolbar>\n    </ion-header>\n\n\n\n  <ion-content>\n\n\n          <ion-content>\n              <div [ngSwitch]="closedtrades">\n                  <ion-list *ngSwitchCase="\'equityStrategyTrades\'">\n                    <ion-row>\n                      <ion-col>\n                        Total Trades: {{totalCount}}\n                      </ion-col>\n                      <ion-col>\n                        Profitable: {{totalProfitable}}%\n                      </ion-col>\n                      <ion-col>\n                          Profit: $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': totalProfit >= 0 ? \'green\' : \'red\'}">{{totalProfit}}</span>\n                        </ion-col>\n                    </ion-row>\n                    <ion-row>\n                        <ion-col>\n                          Total Equity: <span [ngStyle]="{\'visibility\': equityCount == 0 ? \'hidden\' : \'visible\' }">{{equityCount}}</span>\n                        </ion-col>\n                        <ion-col>\n                            Profitable: <span [ngStyle]="{\'visibility\': equityCount == 0 ? \'hidden\' : \'visible\' }">{{equityProfitable}}%</span>\n                        </ion-col>\n                        <ion-col>\n                            Profit: $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': equityProfit >= 0 ? \'green\' : \'red\', \'visibility\': equityCount == 0 ? \'hidden\' : \'visible\'}">{{equityProfit}}</span>\n                          </ion-col>\n                      </ion-row>\n                <ion-item *ngFor="let equityStrategyTrade of equityStrategyTrades" (click)="tradeTapped($event, equityStrategyTrade)">\n                    <h5>{{equityStrategyTrade.direction}}\n                    {{equityStrategyTrade.ticker}}\n                    <span [ngStyle]="{\'font-weight\': \'bold\', \'color\': equityStrategyTrade.percentChange >= 0 ? \'green\' : \'red\'}">{{equityStrategyTrade.percentChange}}%</span></h5>\n                    </ion-item>\n            </ion-list>\n            <ion-list *ngSwitchCase="\'forexStrategyTrades\'">\n                <ion-grid>\n                  <ion-row>\n                    <ion-col>\n                      Total Trades: {{totalCount}}\n                    </ion-col>\n                    <ion-col>\n                      Profitable: {{totalProfitable}}%\n                    </ion-col>\n                    <ion-col>\n                        Profit: $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': totalProfit >= 0 ? \'green\' : \'red\'}">{{totalProfit}}</span>\n                      </ion-col>\n                  </ion-row>\n\n                <ion-row>\n              <ion-col>\n                Total Forex: <span [ngStyle]="{\'visibility\': forexCount == 0 ? \'hidden\' : \'visible\' }">{{forexCount}}</span>\n              </ion-col>\n              <ion-col>\n            Profitable: <span [ngStyle]="{\'visibility\': forexCount == 0 ? \'hidden\' : \'visible\' }">{{forexProfitable}}%</span>\n              </ion-col>\n              <ion-col>\n                  Profit: $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': forexProfit >= 0 ? \'green\' : \'red\', \'visibility\': cryptoCount == 0 ? \'hidden\' : \'visible\'}">{{forexProfit}}</span>\n                </ion-col>\n            </ion-row>\n          </ion-grid>\n                    <ion-item *ngFor="let forexStrategyTrade of forexStrategyTrades" (click)="tradeTapped($event, forexStrategyTrade)">\n                        <h5>{{forexStrategyTrade.direction}}\n                        {{forexStrategyTrade.ticker}}\n                        <span [ngStyle]="{\'font-weight\': \'bold\', \'color\': forexStrategyTrade.percentChange >= 0 ? \'green\' : \'red\'}">{{forexStrategyTrade.percentChange}}%</span></h5>\n                  </ion-item>\n                  </ion-list>              \n                  \n                  \n\n\n              <ion-list *ngSwitchCase="\'cryptoStrategyTrades\'">\n                <ion-grid>\n                  <ion-row>\n                    <ion-col>\n                      Total Trades: {{totalCount}}\n                    </ion-col>\n                    <ion-col>\n                      Profitable: {{totalProfitable}}%\n                    </ion-col>\n                    <ion-col>\n                        Profit: $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': totalProfit >= 0 ? \'green\' : \'red\'}">{{totalProfit}}</span>\n                      </ion-col>\n                  </ion-row>\n\n                <ion-row>\n              <ion-col>\n                Total Crypto: <span [ngStyle]="{\'visibility\': cryptoCount == 0 ? \'hidden\' : \'visible\' }">{{cryptoCount}}</span>\n              </ion-col>\n              <ion-col>\n            Profitable: <span [ngStyle]="{\'visibility\': cryptoCount == 0 ? \'hidden\' : \'visible\' }">{{cryptoProfitable}}%</span>\n              </ion-col>\n              <ion-col>\n                  Profit: $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': cryptoProfit >= 0 ? \'green\' : \'red\', \'visibility\': cryptoCount == 0 ? \'hidden\' : \'visible\'}">{{cryptoProfit}}</span>\n                </ion-col>\n            </ion-row>\n          </ion-grid>\n                    <ion-item *ngFor="let cryptoStrategyTrade of cryptoStrategyTrades" (click)="tradeTapped($event, cryptoStrategyTrade)">\n                        <h5>{{cryptoStrategyTrade.direction}}\n                        {{cryptoStrategyTrade.ticker}}\n                        <span [ngStyle]="{\'font-weight\': \'bold\', \'color\': cryptoStrategyTrade.percentChange >= 0 ? \'green\' : \'red\'}">{{cryptoStrategyTrade.percentChange}}%</span></h5>\n                  </ion-item>\n                  </ion-list>\n    \n    \n\n\n</div>\n  </ion-content>\n  '/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/strategy/strategy.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1__providers_providers_providers__["a" /* ProvidersProvider */]])
     ], StrategyPage);
@@ -1582,28 +1833,36 @@ var OverviewPage = /** @class */ (function () {
     };
     OverviewPage.prototype.getTrades = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var response, response1, _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var response, response1, response2, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0: return [4 /*yield*/, this.provider.getClosedEquityTrades().toPromise()];
                     case 1:
-                        response = _c.sent();
+                        response = _d.sent();
                         return [4 /*yield*/, this.provider.getClosedCryptoTrades().toPromise()];
                     case 2:
-                        response1 = _c.sent();
+                        response1 = _d.sent();
+                        return [4 /*yield*/, this.provider.getClosedForexTrades().toPromise()];
+                    case 3:
+                        response2 = _d.sent();
                         this.equityClosedTrades = response;
                         this.cryptoClosedTrades = response1;
-                        return [4 /*yield*/, this.getStats(response, response1)];
-                    case 3:
-                        _c.sent();
+                        this.forexClosedTrades = response2;
+                        return [4 /*yield*/, this.getStats(response, response1, response2)];
+                    case 4:
+                        _d.sent();
                         _a = this;
                         return [4 /*yield*/, this.equityClosedTrades.sort(this.compare2)];
-                    case 4:
-                        _a.equityClosedTrades = _c.sent();
+                    case 5:
+                        _a.equityClosedTrades = _d.sent();
                         _b = this;
                         return [4 /*yield*/, this.cryptoClosedTrades.sort(this.compare2)];
-                    case 5:
-                        _b.cryptoClosedTrades = _c.sent();
+                    case 6:
+                        _b.cryptoClosedTrades = _d.sent();
+                        _c = this;
+                        return [4 /*yield*/, this.forexClosedTrades.sort(this.compare2)];
+                    case 7:
+                        _c.forexClosedTrades = _d.sent();
                         return [2 /*return*/];
                 }
             });
@@ -1681,13 +1940,16 @@ var OverviewPage = /** @class */ (function () {
             });
         });
     };
-    OverviewPage.prototype.getStats = function (data, data1) {
+    OverviewPage.prototype.getStats = function (data, data1, data2) {
         var count = 0;
         var count1 = 0;
+        var count2 = 0;
         var tradesProfitable = 0;
         var tradesProfitable1 = 0;
+        var tradesProfitable2 = 0;
         var tradesProfit = 0;
         var tradesProfit1 = 0;
+        var tradesProfit2 = 0;
         for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
             var trade = data_1[_i];
             count++;
@@ -1704,15 +1966,26 @@ var OverviewPage = /** @class */ (function () {
                 tradesProfitable1++;
             }
         }
+        for (var _b = 0, data2_1 = data2; _b < data2_1.length; _b++) {
+            var trade = data2_1[_b];
+            count2++;
+            tradesProfit2 += (((trade.percentChange / 100) * trade.signalBuyPrice) * trade.amount);
+            if (trade.percentChange >= 0) {
+                tradesProfitable2++;
+            }
+        }
         this.equityCount = count;
         this.cryptoCount = count1;
-        this.totalCount = count + count1;
+        this.forexCount = count2;
+        this.totalCount = count + count1 + count2;
         this.equityProfitable = Math.round(((tradesProfitable / count) * 100) * 10) / 10;
         this.cryptoProfitable = Math.round(((tradesProfitable1 / count1) * 100) * 10) / 10;
-        this.totalProfitable = Math.round(((tradesProfitable + tradesProfitable1) / (count + count1) * 100) * 10) / 10;
+        this.forexProfitable = Math.round(((tradesProfitable2 / count2) * 100) * 10) / 10;
+        this.totalProfitable = Math.round(((tradesProfitable + tradesProfitable1 + tradesProfitable2) / (count + count1 + count2) * 100) * 10) / 10;
         this.equityProfit = +(tradesProfit.toFixed(2));
         this.cryptoProfit = +(tradesProfit1.toFixed(2));
-        this.totalProfit = +((tradesProfit + tradesProfit1).toFixed(2));
+        this.forexProfit = +(tradesProfit2.toFixed(2));
+        this.totalProfit = +((tradesProfit + tradesProfit1 + tradesProfit2).toFixed(2));
     };
     OverviewPage.prototype.compare = function (a, b) {
         var tradeA = a.id;
@@ -1755,11 +2028,12 @@ var OverviewPage = /** @class */ (function () {
     ], OverviewPage.prototype, "lineCanvas", void 0);
     OverviewPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_4__angular_core__["m" /* Component */])({
-            selector: 'page-overview',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/overview/overview.html"*/'<ion-header>\n    <ion-navbar color = "primary">\n        <button menuToggle ion-button icon-only>\n            <ion-icon name = "menu"></ion-icon>\n        </button>\n        <ion-title>Ephemera</ion-title>\n    </ion-navbar>\n    <ion-toolbar color = "secondary" >\n            <ion-title text-center>\n                    Overview\n            </ion-title>\n        </ion-toolbar>\n</ion-header>\n<ion-content>\n        <h5 text-center>Total Profit</h5>\n        <canvas #lineCanvas></canvas>\n        <ion-grid>\n                <ion-row>\n                  <ion-col>\n                    <span class = "ion-heading">Total Trades </span><br>\n                    <span class = "ion-content">{{totalCount}}</span>\n                  </ion-col>\n                  <ion-col>\n                    <span class = "ion-heading">Profitable </span><br>\n                    <span class = "ion-content">{{totalProfitable}}%</span>\n                  </ion-col>\n                  <ion-col>\n                    <span class = "ion-heading">Profit </span><br>\n                      $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': totalProfit >= 0 ? \'green\' : \'red\'}">{{totalProfit}}</span>\n                    </ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>\n                        <span class = "ion-heading">Total Equity </span><br>\n                    <span class = "ion-content">{{equityCount}}</span>\n                  </ion-col>\n                  <ion-col>\n                        <span class = "ion-heading">Profitable </span><br>\n                      <span class = "ion-content">{{equityProfitable}}%</span>\n                  </ion-col>\n                  <ion-col>\n                        <span class = "ion-heading">Profit </span><br>\n                      $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': equityProfit >= 0 ? \'green\' : \'red\'}">{{equityProfit}}</span>\n                    </ion-col>\n                </ion-row>\n                <ion-row>\n                    <ion-col>\n                            <span class = "ion-heading">Total Crypto </span><br>\n                        <span class = "ion-content">{{cryptoCount}}</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profitable </span> <br>\n                        <span class = "ion-content">{{cryptoProfitable}}%</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profit </span><br>\n                        $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': cryptoProfit >= 0 ? \'green\' : \'red\'}">{{cryptoProfit}}</span>\n                      </ion-col>\n                  </ion-row>\n              </ion-grid>\n        \n</ion-content>\n\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/overview/overview.html"*/
+            selector: 'page-overview',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/overview/overview.html"*/'<ion-header>\n    <ion-navbar color = "primary">\n        <button menuToggle ion-button icon-only>\n            <ion-icon name = "menu"></ion-icon>\n        </button>\n        <ion-title>Ephemera</ion-title>\n    </ion-navbar>\n    <ion-toolbar color = "secondary" >\n            <ion-title text-center>\n                    Overview\n            </ion-title>\n        </ion-toolbar>\n</ion-header>\n<ion-content>\n        <h5 text-center>Total Profit</h5>\n        <canvas #lineCanvas></canvas>\n        <ion-grid>\n                <ion-row>\n                  <ion-col>\n                    <span class = "ion-heading">Total Trades </span><br>\n                    <span class = "ion-content">{{totalCount}}</span>\n                  </ion-col>\n                  <ion-col>\n                    <span class = "ion-heading">Profitable </span><br>\n                    <span class = "ion-content">{{totalProfitable}}%</span>\n                  </ion-col>\n                  <ion-col>\n                    <span class = "ion-heading">Profit </span><br>\n                      $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': totalProfit >= 0 ? \'green\' : \'red\'}">{{totalProfit}}</span>\n                    </ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>\n                        <span class = "ion-heading">Total Equity </span><br>\n                    <span class = "ion-content">{{equityCount}}</span>\n                  </ion-col>\n                  <ion-col>\n                        <span class = "ion-heading">Profitable </span><br>\n                      <span class = "ion-content">{{equityProfitable}}%</span>\n                  </ion-col>\n                  <ion-col>\n                        <span class = "ion-heading">Profit </span><br>\n                      $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': equityProfit >= 0 ? \'green\' : \'red\'}">{{equityProfit}}</span>\n                    </ion-col>\n                </ion-row>\n                <ion-row>\n                    <ion-col>\n                            <span class = "ion-heading">Total Forex </span><br>\n                        <span class = "ion-content">{{forexCount}}</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profitable </span> <br>\n                        <span class = "ion-content">{{forexProfitable}}%</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profit </span><br>\n                        $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': forexProfit >= 0 ? \'green\' : \'red\'}">{{forexProfit}}</span>\n                      </ion-col>\n                  </ion-row>\n                <ion-row>\n                    <ion-col>\n                            <span class = "ion-heading">Total Crypto </span><br>\n                        <span class = "ion-content">{{cryptoCount}}</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profitable </span> <br>\n                        <span class = "ion-content">{{cryptoProfitable}}%</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profit </span><br>\n                        $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': cryptoProfit >= 0 ? \'green\' : \'red\'}">{{cryptoProfit}}</span>\n                      </ion-col>\n                  </ion-row>\n              </ion-grid>\n        \n</ion-content>\n\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/overview/overview.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__["a" /* ProvidersProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__["a" /* ProvidersProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__["a" /* ProvidersProvider */]) === "function" && _b || Object])
     ], OverviewPage);
     return OverviewPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=overview.js.map

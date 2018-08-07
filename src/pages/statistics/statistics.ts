@@ -12,18 +12,16 @@ export class StatisticsPage {
   @ViewChild('lineCanvas') lineCanvas;
   @ViewChild('lineCanvas1') lineCanvas1;
   @ViewChild('lineCanvas2') lineCanvas2;
+  @ViewChild('lineCanvas3') lineCanvas3;
   @ViewChild('barCanvas') barCanvas;
   @ViewChild('barCanvas1') barCanvas1;
   @ViewChild('barCanvas2') barCanvas2;
+  @ViewChild('barCanvas3') barCanvas3;
 
   lineChart: any;
   linechartInput: any;
   linechartData: any;
   linechartLabels: any;
-  // lineChart1: any;
-  // linechart1Input: any;
-  // linechart1Data: any;
-  // linechart1Labels: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public provider : ProvidersProvider) {
@@ -33,9 +31,11 @@ export class StatisticsPage {
     this.getTotalProfitChart();
     this.getTotalEquityProfitChart();
     this.getTotalCryptoProfitChart();
+    this.getTotalForexProfitChart();
     this.getDailyProfitChart();
     this.getDailyEquityChart();
     this.getDailyCryptoChart();
+    this.getDailyForexChart();
   }
 
 
@@ -203,6 +203,60 @@ export class StatisticsPage {
     }
   });
   }
+
+  async getTotalForexProfitChart(){
+    const response =  await this.provider.getAllPnL().toPromise();
+    this.linechartInput = await response.sort(this.compare);
+    this.linechartLabels = await this.linechartInput.map(function(e) {
+      return e.date;
+   });
+   this.linechartData= await this.linechartInput.map(function(e) {
+    return e.runningForex;
+  });;
+  
+  this.lineChart = new Chart(this.lineCanvas3.nativeElement, {
+    type: 'line',
+    options: {
+      legend: {
+          display: false
+      },
+      tooltips: {
+          callbacks: {
+             label: function(tooltipItem) {
+                    return tooltipItem.yLabel;
+             }
+          }
+      }
+  },
+    data: {
+        labels: this.linechartLabels,
+        datasets: [
+            {
+                label: "Total Forex Profit",
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(75,192,192,1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: this.linechartData,
+                spanGaps: false,
+            }
+        ]  
+    }
+  });
+  }
   async getDailyProfitChart(){
     const response =  await this.provider.getAllPnL().toPromise();
     this.linechartInput = await response.sort(this.compare);
@@ -288,7 +342,6 @@ export class StatisticsPage {
     });
     
   }
-
   async getDailyCryptoChart(){
     const response =  await this.provider.getAllPnL().toPromise();
     this.linechartInput = await response.sort(this.compare);
@@ -331,7 +384,50 @@ export class StatisticsPage {
     }
   });
   
-}
+  }
+  async getDailyForexChart(){
+    const response =  await this.provider.getAllPnL().toPromise();
+    this.linechartInput = await response.sort(this.compare);
+    this.linechartLabels = await this.linechartInput.map(function(e) {
+      return e.date;
+   });
+   this.linechartData= await this.linechartInput.map(function(e) {
+    return e.forexProfit;
+  });;
+  
+  this.lineChart = new Chart(this.barCanvas3.nativeElement, {
+    type: 'bar',
+    options: {
+      legend: {
+          display: false
+      },
+      tooltips: {
+          callbacks: {
+             label: function(tooltipItem) {
+                    return tooltipItem.yLabel;
+             }
+          }
+      }
+  },
+    data: {
+        labels: this.linechartLabels,
+        datasets: [
+            {
+                label: "Daily Forex Profit",
+                fill: false,
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(75,192,192,1)",
+                borderWidth: 1,
+                hoverBackgroundColor: "rgba(75,192,192,1)",
+                hoverBorderColor: "rgba(220,220,220,1)",
+                hoverBorderWidth: 2,
+                data: this.linechartData,
+            }
+        ]  
+    }
+  });
+  
+  }
   ionViewDidLoad() {
   }
 

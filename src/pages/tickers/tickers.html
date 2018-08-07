@@ -1,40 +1,43 @@
 
 <ion-header>
+    <ion-navbar color = "secondary">
+      <ion-title>Closed Trades</ion-title>
+    </ion-navbar>
+    <ion-toolbar no-border-top>
+      <ion-segment [(ngModel)]="tickers">
+        <ion-segment-button value = 'equityTickers'>
+          Equity
+        </ion-segment-button>
+        <ion-segment-button value = 'forexTickers'>
+          Forex
+        </ion-segment-button>
+        <ion-segment-button value = 'cryptoTickers'>
+          Crypto
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
 
-  <ion-navbar color = "secondary">
-    <ion-title>Symbols</ion-title>
-  </ion-navbar>
 
-</ion-header>
-
-
-<ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-list-header text-center>Equities</ion-list-header>
-      </ion-col>
-      <ion-col>  
-        <ion-list-header text-center>Crypto</ion-list-header>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-list>
+  <ion-content>
+      <div [ngSwitch]="tickers">
+        <ion-list *ngSwitchCase="'equityTickers'">
           <ion-item *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">
             {{equityTicker.name}}
           </ion-item>
         </ion-list>
-      </ion-col>
 
-    <ion-col>
-      <ion-list>
+        <ion-list *ngSwitchCase="'forexTickers'">
+            <ion-item *ngFor="let forexTicker of forexTickers" ion-item (click)="forexTickerTapped($event, forexTicker)">
+            {{forexTicker.name}}
+            </ion-item>
+          </ion-list>
+
+      <ion-list *ngSwitchCase="'cryptoTickers'">
         <ion-item *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">
         {{cryptoTicker.name}}
         </ion-item>
-      </ion-list>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+        </ion-list>
+
+      </div>
 </ion-content>

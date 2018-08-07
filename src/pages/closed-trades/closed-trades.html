@@ -20,23 +20,23 @@
 
 <ion-content>
   <div [ngSwitch]="closedtrades">
-    <ion-list *ngSwitchCase="'equityClosedTrades'">
+    <ion-list *ngSwitchCase="'equityClosedTrades'" inset>
                 <ion-item *ngFor="let equityClosedTrade of equityClosedTrades" (click)="closedTradeTapped($event, equityClosedTrade)">
-                    <h5>{{equityClosedTrade.direction}}
+                <h5>{{equityClosedTrade.direction}}
                    {{equityClosedTrade.ticker}}
                     <span [ngStyle]="{'font-weight': 'bold', 'color': equityClosedTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityClosedTrade.percentChange}}%</span></h5>
                 </ion-item>
       </ion-list>
-      <ion-list *ngSwitchCase="'forexClosedTrades'">
+      <ion-list *ngSwitchCase="'forexClosedTrades'" inset>
           <ion-item *ngFor="let forexClosedTrade of forexClosedTrades" (click)="closedTradeTapped($event, forexClosedTrade)">
-              <h5>{{forexClosedTrade.direction}}
+          <h5>{{forexClosedTrade.direction}}
               {{forexClosedTrade.pair}}
               <span [ngStyle]="{'font-weight': 'bold', 'color': forexClosedTrade.percentChange >= 0 ? 'green' : 'red'}">{{forexClosedTrade.percentChange}}%</span></h5>
               </ion-item>
       </ion-list>
-      <ion-list *ngSwitchCase="'cryptoClosedTrades'">
+      <ion-list *ngSwitchCase="'cryptoClosedTrades'" inset>
                 <ion-item *ngFor="let cryptoClosedTrade of cryptoClosedTrades" (click)="closedTradeTapped($event, cryptoClosedTrade)">
-                    <h5>{{cryptoClosedTrade.direction}}
+                <h5>{{cryptoClosedTrade.direction}}
                     {{cryptoClosedTrade.ticker}}
                     <span [ngStyle]="{'font-weight': 'bold', 'color': cryptoClosedTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoClosedTrade.percentChange}}%</span></h5>
                     </ion-item>

@@ -17,25 +17,53 @@
       </ion-segment>
     </ion-toolbar>
   </ion-header>
-
-
+  
   <ion-content>
       <div [ngSwitch]="tickers">
         <ion-list *ngSwitchCase="'equityTickers'">
           <ion-item *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">
-            {{equityTicker.name}}
+              <ion-grid>
+                  <ion-row>
+                    <ion-col col-2>
+                        <ion-badge color = "badge">{{equityTicker.count}}</ion-badge>
+              </ion-col>
+              <ion-col>
+                {{equityTicker.name}}
+              </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-item>
         </ion-list>
 
         <ion-list *ngSwitchCase="'forexTickers'">
             <ion-item *ngFor="let forexTicker of forexTickers" ion-item (click)="forexTickerTapped($event, forexTicker)">
-            {{forexTicker.name}}
+                <ion-grid>
+                    <ion-row>
+                      <ion-col col-2>
+                          <ion-badge color = "badge">{{forexTicker.count}}</ion-badge>
+                </ion-col>
+                <ion-col>
+                  {{forexTicker.name}}
+                </ion-col>
+                </ion-row>
+                </ion-grid>
+              
             </ion-item>
           </ion-list>
 
       <ion-list *ngSwitchCase="'cryptoTickers'">
         <ion-item *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">
-        {{cryptoTicker.name}}
+            <ion-grid>
+                <ion-row>
+                  <ion-col col-2>
+                      <ion-badge color = "badge">{{cryptoTicker.count}}</ion-badge>
+            </ion-col>
+            <ion-col>
+              {{cryptoTicker.name}}
+            </ion-col>
+            </ion-row>
+            </ion-grid>
+          
         </ion-item>
         </ion-list>
 

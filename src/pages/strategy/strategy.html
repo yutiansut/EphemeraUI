@@ -49,7 +49,7 @@
                             Profit: $<span [ngStyle]="{'font-weight': 'bold', 'color': equityProfit >= 0 ? 'green' : 'red', 'visibility': equityCount == 0 ? 'hidden' : 'visible'}">{{equityProfit}}</span>
                           </ion-col>
                       </ion-row>
-                <ion-item *ngFor="let equityStrategyTrade of equityStrategyTrades" (click)="tradeTapped($event, equityStrategyTrade)">
+                <ion-item *ngFor="let equityStrategyTrade of equityStrategyTrades" (click)="tradeTapped($event, equityStrategyTrade)" inset>
                     <h5>{{equityStrategyTrade.direction}}
                     {{equityStrategyTrade.ticker}}
                     <span [ngStyle]="{'font-weight': 'bold', 'color': equityStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityStrategyTrade.percentChange}}%</span></h5>
@@ -81,9 +81,9 @@
                 </ion-col>
             </ion-row>
           </ion-grid>
-                    <ion-item *ngFor="let forexStrategyTrade of forexStrategyTrades" (click)="tradeTapped($event, forexStrategyTrade)">
+                    <ion-item *ngFor="let forexStrategyTrade of forexStrategyTrades" (click)="tradeTapped($event, forexStrategyTrade)" inset>
                         <h5>{{forexStrategyTrade.direction}}
-                        {{forexStrategyTrade.ticker}}
+                        {{forexStrategyTrade.pair}}
                         <span [ngStyle]="{'font-weight': 'bold', 'color': forexStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{forexStrategyTrade.percentChange}}%</span></h5>
                   </ion-item>
                   </ion-list>              
@@ -117,7 +117,7 @@
                 </ion-col>
             </ion-row>
           </ion-grid>
-                    <ion-item *ngFor="let cryptoStrategyTrade of cryptoStrategyTrades" (click)="tradeTapped($event, cryptoStrategyTrade)">
+                    <ion-item *ngFor="let cryptoStrategyTrade of cryptoStrategyTrades" (click)="tradeTapped($event, cryptoStrategyTrade)" inset>
                         <h5>{{cryptoStrategyTrade.direction}}
                         {{cryptoStrategyTrade.ticker}}
                         <span [ngStyle]="{'font-weight': 'bold', 'color': cryptoStrategyTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoStrategyTrade.percentChange}}%</span></h5>

@@ -6,7 +6,7 @@
     </ion-navbar>
 
   </ion-header>
-    <ion-content padding>
+    <ion-content>
 <ion-grid>
     <ion-row>
         <ion-col>
@@ -25,23 +25,28 @@
   </ion-grid>
 
   <ion-content>
-      <ion-list>
-        <button *ngFor="let equityTickerTrade of equityTickerTrades" ion-item (click)="tradeTapped($event, equityTickerTrade)">
-            {{equityTickerTrade.direction}}
+      <ion-list inset>
+        <ion-item *ngFor="let equityTickerTrade of equityTickerTrades" ion-item (click)="tradeTapped($event, equityTickerTrade)">
+        <h5>{{equityTickerTrade.direction}}
             {{equityTickerTrade.ticker}}
-            <span [ngStyle]="{'font-weight': 'bold', 'color': equityTickerTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityTickerTrade.percentChange}}%</span>  
-        </button>
+            <span [ngStyle]="{'font-weight': 'bold', 'color': equityTickerTrade.percentChange >= 0 ? 'green' : 'red'}">{{equityTickerTrade.percentChange}}%</span> </h5> 
+        </ion-item>
         
       </ion-list>  
       <ion-list inset>
-        <button *ngFor="let cryptoTickerTrade of cryptoTickerTrades" ion-item (click)="tradeTapped($event, cryptoTickerTrade)">
-            {{cryptoTickerTrade.direction}}
+        <ion-item *ngFor="let cryptoTickerTrade of cryptoTickerTrades" ion-item (click)="tradeTapped($event, cryptoTickerTrade)">
+        <h5>{{cryptoTickerTrade.direction}}
             {{cryptoTickerTrade.ticker}}
-            <span [ngStyle]="{'font-weight': 'bold', 'color': cryptoTickerTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoTickerTrade.percentChange}}%</span>  
-        </button>
+            <span [ngStyle]="{'font-weight': 'bold', 'color': cryptoTickerTrade.percentChange >= 0 ? 'green' : 'red'}">{{cryptoTickerTrade.percentChange}}%</span> </h5> 
+        </ion-item>
       </ion-list>  
-  
-  
-  <ion-content padding>
+
+      <ion-list inset>
+        <ion-item *ngFor="let forexTickerTrade of forexTickerTrades" ion-item (click)="tradeTapped($event, forexTickerTrade)">
+        <h5>{{forexTickerTrade.direction}}
+            {{forexTickerTrade.ticker}}
+            <span [ngStyle]="{'font-weight': 'bold', 'color': forexTickerTrade.percentChange >= 0 ? 'green' : 'red'}">{{forexTickerTrade.percentChange}}%</span>  </h5>
+        </ion-item>
+      </ion-list>  
   
   </ion-content>

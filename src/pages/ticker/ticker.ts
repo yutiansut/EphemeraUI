@@ -12,6 +12,7 @@ export class TickerPage {
   ticker : any;
   equityTickerTrades: any;
   cryptoTickerTrades: any;
+  forexTickerTrades: any;
   count: number;
   tradeProfitable: number;
   tradeProfit: number;
@@ -30,14 +31,17 @@ export class TickerPage {
     async getTrades(){
       const response =  await this.provider.getEquityTradesBySymbol(this.ticker.name).toPromise();
       const response1 = await this.provider.getCryptoTradesBySymbol(this.ticker.name).toPromise();
+      const response2 = await this.provider.getForexTradesBySymbol(this.ticker.name).toPromise();
       this.equityTickerTrades = response;
       this.cryptoTickerTrades = response1;
-      await this.getStats(response, response1);
+      this.forexTickerTrades = response2;
+      await this.getStats(response, response1, response2);
       this.equityTickerTrades = await this.equityTickerTrades.sort(this.compare);
       this.cryptoTickerTrades = await this.cryptoTickerTrades.sort(this.compare)
+      this.forexTickerTrades = await this.forexTickerTrades.sort(this.compare)
     }
 
-    getStats(data, data1){
+    getStats(data, data1, data2){
       var count = 0;
       var tradesProfitable = 0
       var tradesProfit = 0;
@@ -49,6 +53,13 @@ export class TickerPage {
           }
         }
         for(let trade of data1){
+          count++;
+          tradesProfit += (((trade.percentChange/100) * trade.signalBuyPrice)*trade.amount);
+          if(trade.percentChange >= 0){
+            tradesProfitable++;
+          }
+        }
+        for(let trade of data2){
           count++;
           tradesProfit += (((trade.percentChange/100) * trade.signalBuyPrice)*trade.amount);
           if(trade.percentChange >= 0){

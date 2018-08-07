@@ -137,5 +137,4 @@ getDailyCrypto(): Observable<any>{
   return this.http.get(this.PNL + "/dailycrypto")
 }
 
-
 }

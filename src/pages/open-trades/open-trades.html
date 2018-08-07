@@ -21,44 +21,44 @@
 
 <ion-content>
         <div [ngSwitch]="opentrades">
-            <ion-list *ngSwitchCase="'equityOpenTrades'">
+            <ion-list *ngSwitchCase="'equityOpenTrades'" inset>
               <ion-list-header>Long</ion-list-header>
               <ion-item *ngFor="let equityLong of equityLong" (click)="openTradeTapped($event, equityLong)">
-                  <h5>{{equityLong.ticker}} - 
+              <h5>{{equityLong.ticker}} - 
                   {{equityLong.strategy1}}</h5>
                   </ion-item>
               <ion-list-header>Short</ion-list-header>    
               <ion-item *ngFor="let equityShort of equityShort" (click)="openTradeTapped($event, equityShort)">
-                      <h5>{{equityShort.ticker}} - 
+              <h5>{{equityShort.ticker}} - 
                       {{equityShort.strategy1}}</h5>
                 </ion-item>
             </ion-list>
 
 
-        <ion-list *ngSwitchCase="'forexOpenTrades'">
+        <ion-list *ngSwitchCase="'forexOpenTrades'" inset>
                 <ion-list-header>Long</ion-list-header>
                 <ion-item *ngFor="let forexLong of forexLong" (click)="openTradeTapped($event, forexLong)">
-                    <h5>{{forexLong.pair}} - 
+                <h5>{{forexLong.pair}} - 
                     {{forexLong.strategy1}}</h5>
               </ion-item>
   
               <ion-list-header>Short</ion-list-header>    
               <ion-item *ngFor="let forexShort of forexShort" (click)="openTradeTapped($event, forexShort)">
-                      <h5>{{forexShort.pair}} - 
+              <h5>{{forexShort.pair}} - 
                       {{forexShort.strategy1}}</h5>
               </ion-item>
           </ion-list>
 
-        <ion-list *ngSwitchCase="'cryptoOpenTrades'">
+        <ion-list *ngSwitchCase="'cryptoOpenTrades'" inset>
               <ion-list-header>Long</ion-list-header>
               <ion-item *ngFor="let cryptoLong of cryptoLong" (click)="openTradeTapped($event, cryptoLong)">
-                  <h5>{{cryptoLong.ticker}} - 
+              <h5>{{cryptoLong.ticker}} - 
                   {{cryptoLong.strategy1}}</h5>
             </ion-item>
 
             <ion-list-header>Short</ion-list-header>    
             <ion-item *ngFor="let cryptoShort of cryptoShort" (click)="openTradeTapped($event, cryptoShort)">
-                    <h5>{{cryptoShort.ticker}} - 
+            <h5>{{cryptoShort.ticker}} - 
                     {{cryptoShort.strategy1}}</h5>
             </ion-item>
         </ion-list>

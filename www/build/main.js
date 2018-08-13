@@ -1497,8 +1497,8 @@ var TickerPage = /** @class */ (function () {
             }
         }
         this.count = count;
-        this.tradeProfitable = Math.round(((tradesProfitable / count) * 100) * 10) / 10;
-        this.tradeProfit = +(tradesProfit.toFixed(2));
+        this.tradeProfitable = Number((tradesProfitable / count) * 100).toFixed(1);
+        this.tradeProfit = Number(tradesProfit).toFixed(2);
     };
     TickerPage.prototype.compare = function (a, b) {
         var tradeA = a.id;
@@ -1727,14 +1727,14 @@ var StrategyPage = /** @class */ (function () {
         this.cryptoCount = count1;
         this.forexCount = count2;
         this.totalCount = count + count1 + count2;
-        this.equityProfitable = Math.round(((tradesProfitable / count) * 100) * 10) / 10;
-        this.cryptoProfitable = Math.round(((tradesProfitable1 / count1) * 100) * 10) / 10;
-        this.forexProfitable = Math.round(((tradesProfitable2 / count2) * 100) * 10) / 10;
-        this.totalProfitable = Math.round(((tradesProfitable + tradesProfitable1 + tradesProfitable2) / (count + count1 + count2) * 100) * 10) / 10;
-        this.equityProfit = +(tradesProfit.toFixed(2));
-        this.cryptoProfit = +(tradesProfit1.toFixed(2));
-        this.forexProfit = +(tradesProfit2.toFixed(2));
-        this.totalProfit = +((tradesProfit + tradesProfit1 + tradesProfit2).toFixed(2));
+        this.equityProfitable = Number((tradesProfitable / count) * 100).toFixed(1);
+        this.cryptoProfitable = Number((tradesProfitable1 / count1) * 100).toFixed(1);
+        this.forexProfitable = Number((tradesProfitable2 / count2) * 100).toFixed(1);
+        this.totalProfitable = Number((tradesProfitable + tradesProfitable1 + tradesProfitable2) / (count + count1 + count2) * 100).toFixed(1);
+        this.equityProfit = Number(tradesProfit.toFixed(2));
+        this.cryptoProfit = Number(tradesProfit1.toFixed(2));
+        this.forexProfit = Number(tradesProfit2.toFixed(2));
+        this.totalProfit = Number(tradesProfit + tradesProfit1 + tradesProfit2).toFixed(2);
     };
     StrategyPage.prototype.getStartupView = function () {
         if (this.equityCount > 0) {
@@ -1994,14 +1994,14 @@ var OverviewPage = /** @class */ (function () {
         this.cryptoCount = count1;
         this.forexCount = count2;
         this.totalCount = count + count1 + count2;
-        this.equityProfitable = Math.round(((tradesProfitable / count) * 100) * 10) / 10;
-        this.cryptoProfitable = Math.round(((tradesProfitable1 / count1) * 100) * 10) / 10;
-        this.forexProfitable = Math.round(((tradesProfitable2 / count2) * 100) * 10) / 10;
-        this.totalProfitable = Math.round(((tradesProfitable + tradesProfitable1 + tradesProfitable2) / (count + count1 + count2) * 100) * 10) / 10;
-        this.equityProfit = +(tradesProfit.toFixed(2));
-        this.cryptoProfit = +(tradesProfit1.toFixed(2));
-        this.forexProfit = +(tradesProfit2.toFixed(2));
-        this.totalProfit = +((tradesProfit + tradesProfit1 + tradesProfit2).toFixed(2));
+        this.equityProfitable = Number((tradesProfitable / count) * 100).toFixed(1);
+        this.cryptoProfitable = Number((tradesProfitable1 / count1) * 100).toFixed(1);
+        this.forexProfitable = Number((tradesProfitable2 / count2) * 100).toFixed(1);
+        this.totalProfitable = Number((tradesProfitable + tradesProfitable1 + tradesProfitable2) / (count + count1 + count2) * 100).toFixed(1);
+        this.equityProfit = Number(tradesProfit).toFixed(2);
+        this.cryptoProfit = Number(tradesProfit1).toFixed(2);
+        this.forexProfit = Number(tradesProfit2).toFixed(2);
+        this.totalProfit = Number(tradesProfit + tradesProfit1 + tradesProfit2).toFixed(2);
     };
     OverviewPage.prototype.compare = function (a, b) {
         var tradeA = a.id;
@@ -2044,7 +2044,7 @@ var OverviewPage = /** @class */ (function () {
     ], OverviewPage.prototype, "lineCanvas", void 0);
     OverviewPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_4__angular_core__["m" /* Component */])({
-            selector: 'page-overview',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/overview/overview.html"*/'<ion-header>\n    <ion-navbar color = "primary">\n        <button menuToggle ion-button icon-only>\n            <ion-icon name = "menu"></ion-icon>\n        </button>\n        <ion-title>Ephemera</ion-title>\n    </ion-navbar>\n    <ion-toolbar color = "secondary" >\n            <ion-title text-center>\n                    Overview\n            </ion-title>\n        </ion-toolbar>\n</ion-header>\n<ion-content>\n        <h5 text-center>Total Profit</h5>\n        <canvas #lineCanvas></canvas>\n        <ion-grid>\n                <ion-row>\n                  <ion-col>\n                    <span class = "ion-heading">Total Trades </span><br>\n                    <span class = "ion-content">{{totalCount}}</span>\n                  </ion-col>\n                  <ion-col>\n                    <span class = "ion-heading">Profitable </span><br>\n                    <span class = "ion-content">{{totalProfitable}}%</span>\n                  </ion-col>\n                  <ion-col>\n                    <span class = "ion-heading">Profit </span><br>\n                      $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': totalProfit >= 0 ? \'green\' : \'red\'}">{{totalProfit}}</span>\n                    </ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>\n                        <span class = "ion-heading">Total Equity </span><br>\n                    <span class = "ion-content">{{equityCount}}</span>\n                  </ion-col>\n                  <ion-col>\n                        <span class = "ion-heading">Profitable </span><br>\n                      <span class = "ion-content">{{equityProfitable}}%</span>\n                  </ion-col>\n                  <ion-col>\n                        <span class = "ion-heading">Profit </span><br>\n                      $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': equityProfit >= 0 ? \'green\' : \'red\'}">{{equityProfit}}</span>\n                    </ion-col>\n                </ion-row>\n                <ion-row>\n                    <ion-col>\n                            <span class = "ion-heading">Total Forex </span><br>\n                        <span class = "ion-content">{{forexCount}}</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profitable </span> <br>\n                        <span class = "ion-content">{{forexProfitable}}%</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profit </span><br>\n                        $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': forexProfit >= 0 ? \'green\' : \'red\'}">{{forexProfit}}</span>\n                      </ion-col>\n                  </ion-row>\n                <ion-row>\n                    <ion-col>\n                            <span class = "ion-heading">Total Crypto </span><br>\n                        <span class = "ion-content">{{cryptoCount}}</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profitable </span> <br>\n                        <span class = "ion-content">{{cryptoProfitable}}%</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profit </span><br>\n                        $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': cryptoProfit >= 0 ? \'green\' : \'red\'}">{{cryptoProfit}}</span>\n                      </ion-col>\n                  </ion-row>\n              </ion-grid>\n        \n</ion-content>\n\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/overview/overview.html"*/
+            selector: 'page-overview',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/overview/overview.html"*/'<ion-header>\n    <ion-navbar color = "primary">\n        <button menuToggle ion-button icon-only>\n            <ion-icon name = "menu"></ion-icon>\n        </button>\n        <ion-title>Ephemera</ion-title>\n    </ion-navbar>\n    <ion-toolbar color = "secondary" >\n            <ion-title text-center>\n                    Overview\n            </ion-title>\n        </ion-toolbar>\n</ion-header>\n<ion-content>\n        <h5 text-center>Total Profit</h5>\n        <div class="overviewchart">\n        <canvas #lineCanvas></canvas>\n        </div>\n        <div class ="stats">\n        <ion-grid>\n                <ion-row>\n                  <ion-col>\n                    <span class = "ion-heading">Total Trades </span><br>\n                    <span class = "ion-content">{{totalCount}}</span>\n                  </ion-col>\n                  <ion-col>\n                    <span class = "ion-heading">Profitable </span><br>\n                    <span class = "ion-content">{{totalProfitable}}%</span>\n                  </ion-col>\n                  <ion-col>\n                    <span class = "ion-heading">Profit </span><br>\n                      $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': totalProfit >= 0 ? \'green\' : \'red\'}">{{totalProfit}}</span>\n                    </ion-col>\n                </ion-row>\n                <ion-row>\n                  <ion-col>\n                        <span class = "ion-heading">Total Equity </span><br>\n                    <span class = "ion-content">{{equityCount}}</span>\n                  </ion-col>\n                  <ion-col>\n                        <span class = "ion-heading">Profitable </span><br>\n                      <span class = "ion-content">{{equityProfitable}}%</span>\n                  </ion-col>\n                  <ion-col>\n                        <span class = "ion-heading">Profit </span><br>\n                      $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': equityProfit >= 0 ? \'green\' : \'red\'}">{{equityProfit}}</span>\n                    </ion-col>\n                </ion-row>\n                <ion-row>\n                    <ion-col>\n                            <span class = "ion-heading">Total Forex </span><br>\n                        <span class = "ion-content">{{forexCount}}</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profitable </span> <br>\n                        <span class = "ion-content">{{forexProfitable}}%</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profit </span><br>\n                        $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': forexProfit >= 0 ? \'green\' : \'red\'}">{{forexProfit}}</span>\n                      </ion-col>\n                  </ion-row>\n                <ion-row>\n                    <ion-col>\n                            <span class = "ion-heading">Total Crypto </span><br>\n                        <span class = "ion-content">{{cryptoCount}}</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profitable </span> <br>\n                        <span class = "ion-content">{{cryptoProfitable}}%</span>\n                    </ion-col>\n                    <ion-col>\n                        <span class = "ion-heading">Profit </span><br>\n                        $<span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': cryptoProfit >= 0 ? \'green\' : \'red\'}">{{cryptoProfit}}</span>\n                      </ion-col>\n                  </ion-row>\n              </ion-grid>\n            </div>\n</ion-content>\n\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/overview/overview.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__["a" /* ProvidersProvider */]])
     ], OverviewPage);

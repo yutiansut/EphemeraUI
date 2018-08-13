@@ -13,9 +13,9 @@ export class TickerPage {
   equityTickerTrades: any;
   cryptoTickerTrades: any;
   forexTickerTrades: any;
-  count: number;
-  tradeProfitable: number;
-  tradeProfit: number;
+  count: any;
+  tradeProfitable: any;
+  tradeProfit: any;
 
 
 
@@ -67,8 +67,8 @@ export class TickerPage {
           }
         }
           this.count = count;
-          this.tradeProfitable = Math.round(((tradesProfitable/count) * 100) * 10)/10;
-          this.tradeProfit = +(tradesProfit.toFixed(2));
+          this.tradeProfitable = Number((tradesProfitable/count)* 100).toFixed(1);
+          this.tradeProfit = Number(tradesProfit).toFixed(2);
         }
 
     compare(a,b){

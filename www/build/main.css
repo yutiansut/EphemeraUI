@@ -25711,6 +25711,17 @@ page-about ion-list-header {
   font-weight: 500;
 }
 
+@media screen and (min-width: 600px) {
+  .ios page-overview .overviewchart, .md page-overview .overviewchart {
+    width: 500px;
+    height: 400px;
+    float: left;
+  }
+  .ios page-overview .stats, .md page-overview .stats {
+    float: right;
+  }
+}
+
 .ios page-ticker .ion-heading, .md page-ticker .ion-heading {
   font-size: 14px;
   color: #adadad;

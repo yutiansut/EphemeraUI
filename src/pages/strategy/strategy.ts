@@ -14,18 +14,18 @@ export class StrategyPage {
   equityStrategyTrades: any;
   cryptoStrategyTrades: any;
   forexStrategyTrades: any;
-  equityCount: number;
-  cryptoCount: number;
-  forexCount: number;
-  totalCount: number;
-  totalProfitable : number;
-  equityProfitable: number;
-  cryptoProfitable: number;
-  forexProfitable: number;
-  equityProfit: number;
-  cryptoProfit: number;
-  forexProfit: number;
-  totalProfit: number;
+  equityCount: any;
+  cryptoCount: any;
+  forexCount: any;
+  totalCount: any;
+  totalProfitable : any;
+  equityProfitable: any;
+  cryptoProfitable: any;
+  forexProfitable: any;
+  equityProfit: any;
+  cryptoProfit: any;
+  forexProfit: any;
+  totalProfit: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public provider : ProvidersProvider) {
@@ -89,14 +89,14 @@ export class StrategyPage {
           this.cryptoCount = count1; 
           this.forexCount = count2;
           this.totalCount = count + count1 + count2;
-          this.equityProfitable = Math.round(((tradesProfitable/count) * 100) * 10)/10;
-          this.cryptoProfitable = Math.round(((tradesProfitable1/count1) * 100) * 10)/10;
-          this.forexProfitable = Math.round(((tradesProfitable2/count2) * 100) * 10)/10;
-          this.totalProfitable = Math.round(((tradesProfitable + tradesProfitable1 + tradesProfitable2)/(count + count1 + count2)*100)*10)/10;
-          this.equityProfit = +(tradesProfit.toFixed(2));
-          this.cryptoProfit = +(tradesProfit1.toFixed(2));
-          this.forexProfit = +(tradesProfit2.toFixed(2));
-          this.totalProfit = +((tradesProfit + tradesProfit1 + tradesProfit2).toFixed(2));
+          this.equityProfitable = Number((tradesProfitable/count) * 100).toFixed(1);
+          this.cryptoProfitable = Number((tradesProfitable1/count1) * 100).toFixed(1);
+          this.forexProfitable = Number((tradesProfitable2/count2) * 100).toFixed(1);
+          this.totalProfitable = Number((tradesProfitable + tradesProfitable1 + tradesProfitable2)/(count + count1 + count2)*100).toFixed(1);
+          this.equityProfit = Number(tradesProfit.toFixed(2));
+          this.cryptoProfit = Number(tradesProfit1.toFixed(2));
+          this.forexProfit = Number(tradesProfit2.toFixed(2));
+          this.totalProfit = Number(tradesProfit + tradesProfit1 + tradesProfit2).toFixed(2);
         } 
 
     getStartupView(){

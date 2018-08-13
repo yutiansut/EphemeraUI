@@ -466,7 +466,7 @@ var StatisticsPage = /** @class */ (function () {
         this.navParams = navParams;
         this.provider = provider;
     }
-    StatisticsPage.prototype.ngOnInit = function () {
+    StatisticsPage.prototype.ionViewDidEnter = function () {
         this.getTotalProfitChart();
         this.getTotalEquityProfitChart();
         this.getTotalCryptoProfitChart();
@@ -1056,11 +1056,12 @@ var StatisticsPage = /** @class */ (function () {
     ], StatisticsPage.prototype, "barCanvas3", void 0);
     StatisticsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-statistics',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/statistics/statistics.html"*/'\n<ion-header>\n  <ion-navbar color = "secondary">\n    <ion-title text-center>Statistics</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n          <ion-card>\n      <h2 text-center>Total Profit</h2>\n      <canvas #lineCanvas></canvas>\n      </ion-card>\n  </ion-col>\n  <ion-col>\n      <ion-card>\n      <h2 text-center>Daily Profit</h2>\n      <canvas #barCanvas></canvas>\n      </ion-card>\n  </ion-col>\n  </ion-row>\n \n\n<ion-row>\n  <ion-col>\n  <ion-card>\n  <h2 text-center>Total Equity Profit</h2>\n  <canvas #lineCanvas1></canvas>\n  </ion-card>\n  </ion-col>\n  <ion-col>\n      <ion-card>\n      <h2 text-center>Daily Equity Profit</h2>\n      <canvas #barCanvas1></canvas>\n      </ion-card>\n  </ion-col>\n  </ion-row>\n\n  <ion-row>\n    <ion-col>\n    <ion-card>\n    <h2 text-center>Total Forex Profit</h2>\n    <canvas #lineCanvas3></canvas>\n    </ion-card>\n    </ion-col>\n    <ion-col>\n        <ion-card>\n        <h2 text-center>Daily Forex Profit</h2>\n        <canvas #barCanvas3></canvas>\n        </ion-card>\n    </ion-col>\n    </ion-row>\n\n<ion-row>\n    <ion-col>\n    <ion-card>\n    <h2 text-center>Total Crypto Profit</h2>\n    <canvas #lineCanvas2></canvas>\n    </ion-card>\n    </ion-col>\n    <ion-col>\n        <ion-card>\n        <h2 text-center>Daily Crypto Profit</h2>\n        <canvas #barCanvas2></canvas>\n        </ion-card>\n    </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/statistics/statistics.html"*/,
+            selector: 'page-statistics',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/statistics/statistics.html"*/'\n<ion-header>\n  <ion-navbar color = "secondary">\n    <ion-title text-center>Statistics</ion-title>\n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n  <ion-grid >\n    <ion-row>\n      <ion-col>\n          <ion-card>\n      <h2 text-center>Total Profit</h2>\n      <canvas #lineCanvas></canvas>\n      </ion-card>\n  </ion-col>\n  <ion-col>\n      <ion-card>\n      <h2 text-center>Daily Profit</h2>\n      <canvas #barCanvas></canvas>\n      </ion-card>\n  </ion-col>\n  </ion-row>\n<ion-row>\n  <ion-col>\n  <ion-card>\n  <h2 text-center>Total Equity Profit</h2>\n  <canvas #lineCanvas1></canvas>\n  </ion-card>\n  </ion-col>\n  <ion-col>\n      <ion-card>\n      <h2 text-center>Daily Equity Profit</h2>\n      <canvas #barCanvas1></canvas>\n      </ion-card>\n  </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n    <ion-card>\n    <h2 text-center>Total Forex Profit</h2>\n    <canvas #lineCanvas3></canvas>\n    </ion-card>\n    </ion-col>\n    <ion-col>\n        <ion-card>\n        <h2 text-center>Daily Forex Profit</h2>\n        <canvas #barCanvas3></canvas>\n        </ion-card>\n    </ion-col>\n    </ion-row>\n    <ion-row>\n    <ion-col>\n    <ion-card>\n    <h2 text-center>Total Crypto Profit</h2>\n    <canvas #lineCanvas2></canvas>\n    </ion-card>\n    </ion-col>\n    <ion-col>\n        <ion-card>\n        <h2 text-center>Daily Crypto Profit</h2>\n        <canvas #barCanvas2></canvas>\n        </ion-card>\n    </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/statistics/statistics.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_providers_providers__["a" /* ProvidersProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_providers_providers__["a" /* ProvidersProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_providers_providers__["a" /* ProvidersProvider */]) === "function" && _c || Object])
     ], StatisticsPage);
     return StatisticsPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=statistics.js.map
@@ -1158,19 +1159,22 @@ var ModalContentPage = /** @class */ (function () {
 /***/ }),
 
 /***/ 167:
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function webpackEmptyAsyncContext(req) {
-	// Here Promise.resolve().then() is used instead of new Promise() to prevent
-	// uncatched exception popping up in devtools
-	return Promise.resolve().then(function() {
-		throw new Error("Cannot find module '" + req + "'.");
+var map = {};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(ids[0]);
 	});
-}
-webpackEmptyAsyncContext.keys = function() { return []; };
-webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
-module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 167;
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = 167;
+module.exports = webpackAsyncContext;
 
 /***/ }),
 
@@ -1203,6 +1207,7 @@ var ProvidersProvider = /** @class */ (function () {
         this.FOREX_TRADES = this.API + '/forex-trades';
         this.FOREX_TRADE_SIGNALS = this.API + '/forex-trade-signals';
         this.PNL = this.API + '/pnl';
+        this.STATS = this.API + '/stats';
     }
     ProvidersProvider.prototype.getAllEquityTrades = function () {
         return this.http.get(this.EQUITY_TRADES + "/all");
@@ -1293,6 +1298,36 @@ var ProvidersProvider = /** @class */ (function () {
     };
     ProvidersProvider.prototype.getDailyCrypto = function () {
         return this.http.get(this.PNL + "/dailycrypto");
+    };
+    ProvidersProvider.prototype.getTopForexTrade = function () {
+        return this.http.get(this.STATS + "/toptrade/forex");
+    };
+    ProvidersProvider.prototype.getWorstForexTrade = function () {
+        return this.http.get(this.STATS + "/worsttrade/forex");
+    };
+    ProvidersProvider.prototype.getTopEquityTrade = function () {
+        return this.http.get(this.STATS + "/toptrade/equity");
+    };
+    ProvidersProvider.prototype.getWorstEquityTrade = function () {
+        return this.http.get(this.STATS + "/worsttrade/equity");
+    };
+    ProvidersProvider.prototype.getTopCryptoTrade = function () {
+        return this.http.get(this.STATS + "/toptrade/crypto");
+    };
+    ProvidersProvider.prototype.getWorstCryptoTrade = function () {
+        return this.http.get(this.STATS + "/worsttrade/crypto");
+    };
+    ProvidersProvider.prototype.getStrategieStats = function () {
+        return this.http.get(this.STATS + "/strategies");
+    };
+    ProvidersProvider.prototype.getTickerStatsEquity = function () {
+        return this.http.get(this.STATS + "/tickers/equity");
+    };
+    ProvidersProvider.prototype.getTickerStatsCrypto = function () {
+        return this.http.get(this.STATS + "/tickers/equity");
+    };
+    ProvidersProvider.prototype.getTickerStatsForex = function () {
+        return this.http.get(this.STATS + "/tickers/forex");
     };
     ProvidersProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
@@ -2059,6 +2094,46 @@ var OverviewPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StatsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var StatsPage = /** @class */ (function () {
+    function StatsPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    StatsPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad StatsPage');
+    };
+    StatsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-stats',
+            templateUrl: 'stats.html',
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+    ], StatsPage);
+    return StatsPage;
+}());
+
+//# sourceMappingURL=stats.js.map
+
+/***/ }),
+
+/***/ 348:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modal_content__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
@@ -2098,13 +2173,13 @@ var AboutPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 348:
+/***/ 349:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(349);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(369);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(350);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(370);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -2112,7 +2187,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 369:
+/***/ 370:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2130,13 +2205,14 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_overview_overview__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_statistics_statistics__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_strategies_strategies__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_strategy_strategy__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_providers_providers__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_tickers_tickers__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_ticker_ticker__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_about_about__ = __webpack_require__(347);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__app_component__ = __webpack_require__(469);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_statistics_stats__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_strategies_strategies__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_strategy_strategy__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_providers_providers__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_tickers_tickers__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_ticker_ticker__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_about_about__ = __webpack_require__(348);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__app_component__ = __webpack_require__(470);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2163,54 +2239,59 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_7__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_19__app_component__["a" /* MyApp */],
+                __WEBPACK_IMPORTED_MODULE_20__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_overview_overview__["a" /* OverviewPage */],
                 __WEBPACK_IMPORTED_MODULE_12__pages_statistics_statistics__["a" /* StatisticsPage */],
-                __WEBPACK_IMPORTED_MODULE_13__pages_strategies_strategies__["a" /* StrategiesPage */],
-                __WEBPACK_IMPORTED_MODULE_14__pages_strategy_strategy__["a" /* StrategyPage */],
+                __WEBPACK_IMPORTED_MODULE_14__pages_strategies_strategies__["a" /* StrategiesPage */],
+                __WEBPACK_IMPORTED_MODULE_15__pages_strategy_strategy__["a" /* StrategyPage */],
                 __WEBPACK_IMPORTED_MODULE_5__pages_trade_trade__["a" /* TradePage */],
                 __WEBPACK_IMPORTED_MODULE_3__pages_closed_trades_closed_trades__["a" /* ClosedTradesPage */],
                 __WEBPACK_IMPORTED_MODULE_4__pages_open_trades_open_trades__["a" /* OpenTradesPage */],
                 __WEBPACK_IMPORTED_MODULE_1__pages_viewtradeby_viewtradeby__["a" /* ViewtradebyPage */],
-                __WEBPACK_IMPORTED_MODULE_16__pages_tickers_tickers__["a" /* TickersPage */],
-                __WEBPACK_IMPORTED_MODULE_17__pages_ticker_ticker__["a" /* TickerPage */],
-                __WEBPACK_IMPORTED_MODULE_18__pages_about_about__["a" /* AboutPage */],
-                __WEBPACK_IMPORTED_MODULE_0__pages_about_modal_content__["a" /* ModalContentPage */]
+                __WEBPACK_IMPORTED_MODULE_17__pages_tickers_tickers__["a" /* TickersPage */],
+                __WEBPACK_IMPORTED_MODULE_18__pages_ticker_ticker__["a" /* TickerPage */],
+                __WEBPACK_IMPORTED_MODULE_19__pages_about_about__["a" /* AboutPage */],
+                __WEBPACK_IMPORTED_MODULE_0__pages_about_modal_content__["a" /* ModalContentPage */],
+                __WEBPACK_IMPORTED_MODULE_13__pages_statistics_stats__["a" /* StatsPage */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_8_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_19__app_component__["a" /* MyApp */], {}, {
-                    links: []
+                __WEBPACK_IMPORTED_MODULE_8_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_20__app_component__["a" /* MyApp */], {}, {
+                    links: [
+                        { loadChildren: '../pages/stats1/stats1.module#Stats1PageModule', name: 'Stats1Page', segment: 'stats1', priority: 'low', defaultHistory: [] }
+                    ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClientModule */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_8_ionic_angular__["a" /* IonicApp */]],
             entryComponents: [
-                __WEBPACK_IMPORTED_MODULE_19__app_component__["a" /* MyApp */],
+                __WEBPACK_IMPORTED_MODULE_20__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_overview_overview__["a" /* OverviewPage */],
                 __WEBPACK_IMPORTED_MODULE_12__pages_statistics_statistics__["a" /* StatisticsPage */],
-                __WEBPACK_IMPORTED_MODULE_13__pages_strategies_strategies__["a" /* StrategiesPage */],
-                __WEBPACK_IMPORTED_MODULE_14__pages_strategy_strategy__["a" /* StrategyPage */],
+                __WEBPACK_IMPORTED_MODULE_14__pages_strategies_strategies__["a" /* StrategiesPage */],
+                __WEBPACK_IMPORTED_MODULE_15__pages_strategy_strategy__["a" /* StrategyPage */],
                 __WEBPACK_IMPORTED_MODULE_5__pages_trade_trade__["a" /* TradePage */],
                 __WEBPACK_IMPORTED_MODULE_3__pages_closed_trades_closed_trades__["a" /* ClosedTradesPage */],
                 __WEBPACK_IMPORTED_MODULE_4__pages_open_trades_open_trades__["a" /* OpenTradesPage */],
                 __WEBPACK_IMPORTED_MODULE_1__pages_viewtradeby_viewtradeby__["a" /* ViewtradebyPage */],
-                __WEBPACK_IMPORTED_MODULE_16__pages_tickers_tickers__["a" /* TickersPage */],
-                __WEBPACK_IMPORTED_MODULE_17__pages_ticker_ticker__["a" /* TickerPage */],
-                __WEBPACK_IMPORTED_MODULE_18__pages_about_about__["a" /* AboutPage */],
-                __WEBPACK_IMPORTED_MODULE_0__pages_about_modal_content__["a" /* ModalContentPage */]
+                __WEBPACK_IMPORTED_MODULE_17__pages_tickers_tickers__["a" /* TickersPage */],
+                __WEBPACK_IMPORTED_MODULE_18__pages_ticker_ticker__["a" /* TickerPage */],
+                __WEBPACK_IMPORTED_MODULE_19__pages_about_about__["a" /* AboutPage */],
+                __WEBPACK_IMPORTED_MODULE_0__pages_about_modal_content__["a" /* ModalContentPage */],
+                __WEBPACK_IMPORTED_MODULE_13__pages_statistics_stats__["a" /* StatsPage */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__["a" /* SplashScreen */],
                 { provide: __WEBPACK_IMPORTED_MODULE_7__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_8_ionic_angular__["b" /* IonicErrorHandler */] },
-                __WEBPACK_IMPORTED_MODULE_15__providers_providers_providers__["a" /* ProvidersProvider */],
+                __WEBPACK_IMPORTED_MODULE_16__providers_providers_providers__["a" /* ProvidersProvider */],
             ]
         })
     ], AppModule);
@@ -2221,7 +2302,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 450:
+/***/ 451:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -2486,11 +2567,54 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 450;
+webpackContext.id = 451;
 
 /***/ }),
 
-/***/ 469:
+/***/ 47:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TradePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__ = __webpack_require__(19);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var TradePage = /** @class */ (function () {
+    function TradePage(navCtrl, navParams, provider) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.provider = provider;
+        this.trade = this.navParams.data;
+    }
+    TradePage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad TradePage');
+    };
+    TradePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-trade',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/trade/trade.html"*/'\n<ion-header>\n  <ion-navbar color = "secondary">\n    <ion-title text-center> Trade #{{trade.id}}</ion-title>\n  </ion-navbar>\n</ion-header> \n\n\n<ion-content>\n  <ion-grid>\n\n <ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Status </span><br>\n          <span class = "ion-content">{{trade.status}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item [ngStyle]="{\'visibility\': trade.status == \'OPEN\' ? \'hidden\' : \'visible\' }">\n            <span class = "ion-heading">Percent Change </span><br>\n            <span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': trade.percentChange >= 0 ? \'green\' : \'red\'}">{{trade.percentChange}}%</span>          \n          </ion-item>\n    </ion-col>\n</ion-row>\n<ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Symbol </span><br> \n          <span class = "ion-content">{{trade.ticker}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Amount </span><br>\n            <span class = "ion-content">{{trade.amount}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>\n\n<ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Direction </span><br>\n          <span class = "ion-content">{{trade.direction}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Strategy </span><br>\n            <span class = "ion-content">{{trade.strategy1}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>\n<ion-row>   \n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Open Price </span><br>\n            <span class = "ion-content">${{trade.signalBuyPrice}}</span>\n          </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Open Time </span><br>\n            <span class = "ion-content">{{trade.buyTimestamp}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>        \n<ion-row [ngStyle]="{\'visibility\': trade.status == \'OPEN\' ? \'hidden\' : \'visible\' }">   \n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Close Price </span><br>\n            <span class = "ion-content">${{trade.signalSellPrice}}</span>\n          </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Close Time </span><br>\n            <span class = "ion-content">{{trade.sellTimestamp}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>   \n<ion-row>  \n    <ion-col>\n          <ion-item>\n            <span class = "ion-heading">Notes </span><br>\n            <span class = "ion-content">{{trade.strategy1Notes}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>   \n</ion-grid> \n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/trade/trade.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__["a" /* ProvidersProvider */]])
+    ], TradePage);
+    return TradePage;
+}());
+
+//# sourceMappingURL=trade.js.map
+
+/***/ }),
+
+/***/ 470:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2504,7 +2628,7 @@ webpackContext.id = 450;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_statistics_statistics__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_open_trades_open_trades__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_tickers_tickers__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_about_about__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_about_about__ = __webpack_require__(348);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2576,50 +2700,7 @@ var MyApp = /** @class */ (function () {
 
 //# sourceMappingURL=app.component.js.map
 
-/***/ }),
-
-/***/ 47:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TradePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__ = __webpack_require__(19);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var TradePage = /** @class */ (function () {
-    function TradePage(navCtrl, navParams, provider) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.provider = provider;
-        this.trade = this.navParams.data;
-    }
-    TradePage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad TradePage');
-    };
-    TradePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-trade',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/trade/trade.html"*/'\n<ion-header>\n  <ion-navbar color = "secondary">\n    <ion-title text-center> Trade #{{trade.id}}</ion-title>\n  </ion-navbar>\n</ion-header> \n\n\n<ion-content>\n  <ion-grid>\n\n <ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Status </span><br>\n          <span class = "ion-content">{{trade.status}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item [ngStyle]="{\'visibility\': trade.status == \'OPEN\' ? \'hidden\' : \'visible\' }">\n            <span class = "ion-heading">Percent Change </span><br>\n            <span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': trade.percentChange >= 0 ? \'green\' : \'red\'}">{{trade.percentChange}}%</span>          \n          </ion-item>\n    </ion-col>\n</ion-row>\n<ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Symbol </span><br> \n          <span class = "ion-content">{{trade.ticker}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Amount </span><br>\n            <span class = "ion-content">{{trade.amount}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>\n\n<ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Direction </span><br>\n          <span class = "ion-content">{{trade.direction}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Strategy </span><br>\n            <span class = "ion-content">{{trade.strategy1}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>\n<ion-row>   \n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Open Price </span><br>\n            <span class = "ion-content">${{trade.signalBuyPrice}}</span>\n          </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Open Time </span><br>\n            <span class = "ion-content">{{trade.buyTimestamp}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>        \n<ion-row [ngStyle]="{\'visibility\': trade.status == \'OPEN\' ? \'hidden\' : \'visible\' }">   \n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Close Price </span><br>\n            <span class = "ion-content">${{trade.signalSellPrice}}</span>\n          </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Close Time </span><br>\n            <span class = "ion-content">{{trade.sellTimestamp}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>   \n<ion-row>  \n    <ion-col>\n          <ion-item>\n            <span class = "ion-heading">Notes </span><br>\n            <span class = "ion-content">{{trade.strategy1Notes}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>   \n</ion-grid> \n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/trade/trade.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__["a" /* ProvidersProvider */]])
-    ], TradePage);
-    return TradePage;
-}());
-
-//# sourceMappingURL=trade.js.map
-
 /***/ })
 
-},[348]);
+},[349]);
 //# sourceMappingURL=main.js.map

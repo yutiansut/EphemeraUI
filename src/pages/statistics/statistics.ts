@@ -1,6 +1,7 @@
+
 import { Chart } from 'chart.js';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Tabs } from 'ionic-angular';
 import { ProvidersProvider } from '../../providers/providers/providers';
 
 
@@ -23,11 +24,11 @@ export class StatisticsPage {
   linechartData: any;
   linechartLabels: any;
 
-
   constructor(public navCtrl: NavController, public navParams: NavParams, public provider : ProvidersProvider) {
-  }
 
-  ngOnInit(){
+    }
+
+  ionViewDidEnter(){
     this.getTotalProfitChart();
     this.getTotalEquityProfitChart();
     this.getTotalCryptoProfitChart();
@@ -54,6 +55,7 @@ export class StatisticsPage {
     options: {
       legend: {
           display: false
+          
       },
       tooltips: {
           callbacks: {

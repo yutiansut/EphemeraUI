@@ -14,6 +14,7 @@ export class ProvidersProvider {
   public FOREX_TRADES = this.API + '/forex-trades';
   public FOREX_TRADE_SIGNALS  = this.API + '/forex-trade-signals';
   public PNL  = this.API + '/pnl';
+  public STATS  = this.API + '/stats';
 
   constructor(public http: HttpClient) {
   }
@@ -136,5 +137,48 @@ getDailyEquity(): Observable<any>{
 getDailyCrypto(): Observable<any>{
   return this.http.get(this.PNL + "/dailycrypto")
 }
+
+getTopForexTrade(): Observable<any>{
+  return this.http.get(this.STATS + "/toptrade/forex")
+}
+
+getWorstForexTrade(): Observable<any>{
+  return this.http.get(this.STATS + "/worsttrade/forex")
+}
+
+getTopEquityTrade(): Observable<any>{
+  return this.http.get(this.STATS + "/toptrade/equity")
+}
+
+getWorstEquityTrade(): Observable<any>{
+  return this.http.get(this.STATS + "/worsttrade/equity")
+}
+getTopCryptoTrade(): Observable<any>{
+  return this.http.get(this.STATS + "/toptrade/crypto")
+}
+
+getWorstCryptoTrade(): Observable<any>{
+  return this.http.get(this.STATS + "/worsttrade/crypto")
+}
+
+getStrategieStats(): Observable<any>{
+  return this.http.get(this.STATS + "/strategies")
+}
+
+getTickerStatsEquity(): Observable<any>{
+  return this.http.get(this.STATS + "/tickers/equity")
+}
+
+getTickerStatsCrypto(): Observable<any>{
+  return this.http.get(this.STATS + "/tickers/equity")
+}
+
+getTickerStatsForex(): Observable<any>{
+  return this.http.get(this.STATS + "/tickers/forex")
+}
+
+
+
+
 
 }

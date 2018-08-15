@@ -63,6 +63,8 @@ var TickersPage = /** @class */ (function () {
         this.navParams = navParams;
         this.provider = provider;
         this.tickers = "tickers";
+        this.descending = false;
+        this.column = 'name';
         this.tickers = "equityTickers";
     }
     TickersPage.prototype.ngOnInit = function () {
@@ -114,6 +116,57 @@ var TickersPage = /** @class */ (function () {
         }
         return comparison;
     };
+    TickersPage.prototype.compare1 = function (a, b) {
+        var tradeA = a.profit;
+        var tradeB = b.profit;
+        var comparison = 0;
+        if (tradeA > tradeB) {
+            comparison = 1;
+        }
+        else if (tradeA < tradeB) {
+            comparison = -1;
+        }
+        return comparison * -1;
+    };
+    TickersPage.prototype.compare2 = function (a, b) {
+        var tradeA = a.name;
+        var tradeB = b.name;
+        var comparison = 0;
+        if (tradeA > tradeB) {
+            comparison = 1;
+        }
+        else if (tradeA < tradeB) {
+            comparison = -1;
+        }
+        return comparison;
+    };
+    TickersPage.prototype.compare3 = function (a, b) {
+        var tradeA = a.count;
+        var tradeB = b.count;
+        var comparison = 0;
+        if (tradeA > tradeB) {
+            comparison = 1;
+        }
+        else if (tradeA < tradeB) {
+            comparison = -1;
+        }
+        return comparison * -1;
+    };
+    TickersPage.prototype.profitSort = function () {
+        this.equityTickers = this.equityTickers.sort(this.compare1);
+        this.cryptoTickers = this.cryptoTickers.sort(this.compare1);
+        this.forexTickers = this.forexTickers.sort(this.compare1);
+    };
+    TickersPage.prototype.nameSort = function () {
+        this.equityTickers = this.equityTickers.sort(this.compare2);
+        this.cryptoTickers = this.cryptoTickers.sort(this.compare2);
+        this.forexTickers = this.forexTickers.sort(this.compare2);
+    };
+    TickersPage.prototype.countSort = function () {
+        this.equityTickers = this.equityTickers.sort(this.compare3);
+        this.cryptoTickers = this.cryptoTickers.sort(this.compare3);
+        this.forexTickers = this.forexTickers.sort(this.compare3);
+    };
     TickersPage.prototype.equityTickerTapped = function ($event, equityTicker) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__ticker_ticker__["a" /* TickerPage */], equityTicker);
     };
@@ -125,7 +178,7 @@ var TickersPage = /** @class */ (function () {
     };
     TickersPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-tickers',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/tickers/tickers.html"*/'\n<ion-header>\n    <ion-navbar color = "secondary">\n      <ion-title>Closed Trades</ion-title>\n    </ion-navbar>\n    <ion-toolbar no-border-top>\n      <ion-segment [(ngModel)]="tickers">\n        <ion-segment-button value = \'equityTickers\'>\n          Equity\n        </ion-segment-button>\n        <ion-segment-button value = \'forexTickers\'>\n          Forex\n        </ion-segment-button>\n        <ion-segment-button value = \'cryptoTickers\'>\n          Crypto\n        </ion-segment-button>\n      </ion-segment>\n    </ion-toolbar>\n  </ion-header>\n  \n  <ion-content>\n      <div [ngSwitch]="tickers">\n        <ion-list *ngSwitchCase="\'equityTickers\'">\n          <ion-item *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">\n              <ion-grid>\n                  <ion-row>\n                    <ion-col col-2>\n                        <ion-badge color = "badge">{{equityTicker.count}}</ion-badge>\n              </ion-col>\n              <ion-col>\n                {{equityTicker.name}}\n              </ion-col>\n              </ion-row>\n            </ion-grid>\n          </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'forexTickers\'">\n            <ion-item *ngFor="let forexTicker of forexTickers" ion-item (click)="forexTickerTapped($event, forexTicker)">\n                <ion-grid>\n                    <ion-row>\n                      <ion-col col-2>\n                          <ion-badge color = "badge">{{forexTicker.count}}</ion-badge>\n                </ion-col>\n                <ion-col>\n                  {{forexTicker.name}}\n                </ion-col>\n                </ion-row>\n                </ion-grid>\n              \n            </ion-item>\n          </ion-list>\n\n      <ion-list *ngSwitchCase="\'cryptoTickers\'">\n        <ion-item *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">\n            <ion-grid>\n                <ion-row>\n                  <ion-col col-2>\n                      <ion-badge color = "badge">{{cryptoTicker.count}}</ion-badge>\n            </ion-col>\n            <ion-col>\n              {{cryptoTicker.name}}\n            </ion-col>\n            </ion-row>\n            </ion-grid>\n          \n        </ion-item>\n        </ion-list>\n\n      </div>\n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/tickers/tickers.html"*/,
+            selector: 'page-tickers',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/tickers/tickers.html"*/'\n<ion-header>\n    <ion-navbar color = "secondary">\n      <ion-title>Closed Trades</ion-title>\n    </ion-navbar>\n    <ion-toolbar no-border-top >\n      <ion-segment [(ngModel)]="tickers">\n        <ion-segment-button value = \'equityTickers\'>\n          Equity\n        </ion-segment-button>\n        <ion-segment-button value = \'forexTickers\'>\n          Forex\n        </ion-segment-button>\n        <ion-segment-button value = \'cryptoTickers\'>\n          Crypto\n        </ion-segment-button>\n      </ion-segment>\n    </ion-toolbar>\n    <ion-toolbar no-border-top >\n    <ion-segment>\n            <ion-segment-button type="button" (click)="countSort()">            \n              <span [ngStyle]="{\'font-size\': \'9px\'}">\n                Count</span></ion-segment-button>\n            <ion-segment-button type="button" (click)="nameSort()">              \n              <span [ngStyle]="{\'font-size\': \'9px\'}">\n                Name</span></ion-segment-button>\n            <ion-segment-button type="button"(click)="profitSort()">              \n              <span [ngStyle]="{\'font-size\': \'9px\'}">\n                Profit</span></ion-segment-button>\n      </ion-segment>\n    </ion-toolbar>\n  </ion-header>\n  \n  <ion-content>\n      <div [ngSwitch]="tickers">\n        <ion-list *ngSwitchCase="\'equityTickers\'">\n          <ion-item *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">\n              <ion-grid>\n                  <ion-row>\n                    <ion-col col-3>\n                    <ion-badge color = "badge">{{equityTicker.count}}</ion-badge>\n              </ion-col>\n              <ion-col col-3>\n                {{equityTicker.name}}\n              </ion-col>\n              <ion-col col-3>\n                $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': equityTicker.profit >= 0 ? \'green\' : \'red\'}">{{equityTicker.profit}}</span>\n              </ion-col>\n              </ion-row>\n            </ion-grid>\n          </ion-item>\n        </ion-list>\n\n        <ion-list *ngSwitchCase="\'forexTickers\'">\n            <ion-item *ngFor="let forexTicker of forexTickers" ion-item (click)="forexTickerTapped($event, forexTicker)">\n                <ion-grid>\n                    <ion-row>\n                      <ion-col col-3>\n                          <ion-badge color = "badge">{{forexTicker.count}}</ion-badge>\n                </ion-col>\n                <ion-col col-3>\n                  {{forexTicker.name}}\n                </ion-col>\n                <ion-col col-3>\n                  $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': forexTicker.profit >= 0 ? \'green\' : \'red\'}">{{forexTicker.profit}}</span>                </ion-col>\n                </ion-row>\n                </ion-grid>\n              \n            </ion-item>\n          </ion-list>\n\n      <ion-list *ngSwitchCase="\'cryptoTickers\'">\n        <ion-item *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">\n            <ion-grid>\n                <ion-row>\n                  <ion-col col-3>\n                      <ion-badge color = "badge">{{cryptoTicker.count}}</ion-badge>\n            </ion-col>\n            <ion-col col-3>\n              {{cryptoTicker.name}}\n            </ion-col>\n            <ion-col col-3>\n              $<span [ngStyle]="{\'font-weight\': \'bold\', \'color\': cryptoTicker.profit >= 0 ? \'green\' : \'red\'}">{{cryptoTicker.profit}}</span>            </ion-col>\n            </ion-row>\n            </ion-grid>\n          \n        </ion-item>\n        </ion-list>\n\n      </div>\n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/tickers/tickers.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0__providers_providers_providers__["a" /* ProvidersProvider */]])
     ], TickersPage);
@@ -1058,10 +1111,9 @@ var StatisticsPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
             selector: 'page-statistics',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/statistics/statistics.html"*/'\n<ion-header>\n  <ion-navbar color = "secondary">\n    <ion-title text-center>Statistics</ion-title>\n  </ion-navbar>\n\n</ion-header>\n<ion-content padding>\n  <ion-grid >\n    <ion-row>\n      <ion-col>\n          <ion-card>\n      <h2 text-center>Total Profit</h2>\n      <canvas #lineCanvas></canvas>\n      </ion-card>\n  </ion-col>\n  <ion-col>\n      <ion-card>\n      <h2 text-center>Daily Profit</h2>\n      <canvas #barCanvas></canvas>\n      </ion-card>\n  </ion-col>\n  </ion-row>\n<ion-row>\n  <ion-col>\n  <ion-card>\n  <h2 text-center>Total Equity Profit</h2>\n  <canvas #lineCanvas1></canvas>\n  </ion-card>\n  </ion-col>\n  <ion-col>\n      <ion-card>\n      <h2 text-center>Daily Equity Profit</h2>\n      <canvas #barCanvas1></canvas>\n      </ion-card>\n  </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n    <ion-card>\n    <h2 text-center>Total Forex Profit</h2>\n    <canvas #lineCanvas3></canvas>\n    </ion-card>\n    </ion-col>\n    <ion-col>\n        <ion-card>\n        <h2 text-center>Daily Forex Profit</h2>\n        <canvas #barCanvas3></canvas>\n        </ion-card>\n    </ion-col>\n    </ion-row>\n    <ion-row>\n    <ion-col>\n    <ion-card>\n    <h2 text-center>Total Crypto Profit</h2>\n    <canvas #lineCanvas2></canvas>\n    </ion-card>\n    </ion-col>\n    <ion-col>\n        <ion-card>\n        <h2 text-center>Daily Crypto Profit</h2>\n        <canvas #barCanvas2></canvas>\n        </ion-card>\n    </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/statistics/statistics.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_providers_providers__["a" /* ProvidersProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_providers_providers__["a" /* ProvidersProvider */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_providers_providers__["a" /* ProvidersProvider */]])
     ], StatisticsPage);
     return StatisticsPage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=statistics.js.map
@@ -1159,22 +1211,19 @@ var ModalContentPage = /** @class */ (function () {
 /***/ }),
 
 /***/ 167:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var map = {};
-function webpackAsyncContext(req) {
-	var ids = map[req];
-	if(!ids)
-		return Promise.reject(new Error("Cannot find module '" + req + "'."));
-	return __webpack_require__.e(ids[1]).then(function() {
-		return __webpack_require__(ids[0]);
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
 	});
-};
-webpackAsyncContext.keys = function webpackAsyncContextKeys() {
-	return Object.keys(map);
-};
-webpackAsyncContext.id = 167;
-module.exports = webpackAsyncContext;
+}
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = 167;
 
 /***/ }),
 
@@ -2094,46 +2143,6 @@ var OverviewPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StatsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var StatsPage = /** @class */ (function () {
-    function StatsPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    StatsPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad StatsPage');
-    };
-    StatsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-stats',
-            templateUrl: 'stats.html',
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
-    ], StatsPage);
-    return StatsPage;
-}());
-
-//# sourceMappingURL=stats.js.map
-
-/***/ }),
-
-/***/ 348:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modal_content__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
@@ -2173,13 +2182,13 @@ var AboutPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 349:
+/***/ 348:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(350);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(370);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(369);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -2187,7 +2196,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 370:
+/***/ 369:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2205,14 +2214,13 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_overview_overview__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_statistics_statistics__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_statistics_stats__ = __webpack_require__(347);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_strategies_strategies__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_strategy_strategy__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_providers_providers__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_tickers_tickers__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_ticker_ticker__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_about_about__ = __webpack_require__(348);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__app_component__ = __webpack_require__(470);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_strategies_strategies__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_strategy_strategy__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_providers_providers__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_tickers_tickers__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_ticker_ticker__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_about_about__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__app_component__ = __webpack_require__(469);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2239,59 +2247,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_7__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_20__app_component__["a" /* MyApp */],
+                __WEBPACK_IMPORTED_MODULE_19__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_overview_overview__["a" /* OverviewPage */],
                 __WEBPACK_IMPORTED_MODULE_12__pages_statistics_statistics__["a" /* StatisticsPage */],
-                __WEBPACK_IMPORTED_MODULE_14__pages_strategies_strategies__["a" /* StrategiesPage */],
-                __WEBPACK_IMPORTED_MODULE_15__pages_strategy_strategy__["a" /* StrategyPage */],
+                __WEBPACK_IMPORTED_MODULE_13__pages_strategies_strategies__["a" /* StrategiesPage */],
+                __WEBPACK_IMPORTED_MODULE_14__pages_strategy_strategy__["a" /* StrategyPage */],
                 __WEBPACK_IMPORTED_MODULE_5__pages_trade_trade__["a" /* TradePage */],
                 __WEBPACK_IMPORTED_MODULE_3__pages_closed_trades_closed_trades__["a" /* ClosedTradesPage */],
                 __WEBPACK_IMPORTED_MODULE_4__pages_open_trades_open_trades__["a" /* OpenTradesPage */],
                 __WEBPACK_IMPORTED_MODULE_1__pages_viewtradeby_viewtradeby__["a" /* ViewtradebyPage */],
-                __WEBPACK_IMPORTED_MODULE_17__pages_tickers_tickers__["a" /* TickersPage */],
-                __WEBPACK_IMPORTED_MODULE_18__pages_ticker_ticker__["a" /* TickerPage */],
-                __WEBPACK_IMPORTED_MODULE_19__pages_about_about__["a" /* AboutPage */],
+                __WEBPACK_IMPORTED_MODULE_16__pages_tickers_tickers__["a" /* TickersPage */],
+                __WEBPACK_IMPORTED_MODULE_17__pages_ticker_ticker__["a" /* TickerPage */],
+                __WEBPACK_IMPORTED_MODULE_18__pages_about_about__["a" /* AboutPage */],
                 __WEBPACK_IMPORTED_MODULE_0__pages_about_modal_content__["a" /* ModalContentPage */],
-                __WEBPACK_IMPORTED_MODULE_13__pages_statistics_stats__["a" /* StatsPage */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_8_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_20__app_component__["a" /* MyApp */], {}, {
-                    links: [
-                        { loadChildren: '../pages/stats1/stats1.module#Stats1PageModule', name: 'Stats1Page', segment: 'stats1', priority: 'low', defaultHistory: [] }
-                    ]
+                __WEBPACK_IMPORTED_MODULE_8_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_19__app_component__["a" /* MyApp */], {}, {
+                    links: []
                 }),
                 __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["b" /* HttpClientModule */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_8_ionic_angular__["a" /* IonicApp */]],
             entryComponents: [
-                __WEBPACK_IMPORTED_MODULE_20__app_component__["a" /* MyApp */],
+                __WEBPACK_IMPORTED_MODULE_19__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_11__pages_overview_overview__["a" /* OverviewPage */],
                 __WEBPACK_IMPORTED_MODULE_12__pages_statistics_statistics__["a" /* StatisticsPage */],
-                __WEBPACK_IMPORTED_MODULE_14__pages_strategies_strategies__["a" /* StrategiesPage */],
-                __WEBPACK_IMPORTED_MODULE_15__pages_strategy_strategy__["a" /* StrategyPage */],
+                __WEBPACK_IMPORTED_MODULE_13__pages_strategies_strategies__["a" /* StrategiesPage */],
+                __WEBPACK_IMPORTED_MODULE_14__pages_strategy_strategy__["a" /* StrategyPage */],
                 __WEBPACK_IMPORTED_MODULE_5__pages_trade_trade__["a" /* TradePage */],
                 __WEBPACK_IMPORTED_MODULE_3__pages_closed_trades_closed_trades__["a" /* ClosedTradesPage */],
                 __WEBPACK_IMPORTED_MODULE_4__pages_open_trades_open_trades__["a" /* OpenTradesPage */],
                 __WEBPACK_IMPORTED_MODULE_1__pages_viewtradeby_viewtradeby__["a" /* ViewtradebyPage */],
-                __WEBPACK_IMPORTED_MODULE_17__pages_tickers_tickers__["a" /* TickersPage */],
-                __WEBPACK_IMPORTED_MODULE_18__pages_ticker_ticker__["a" /* TickerPage */],
-                __WEBPACK_IMPORTED_MODULE_19__pages_about_about__["a" /* AboutPage */],
-                __WEBPACK_IMPORTED_MODULE_0__pages_about_modal_content__["a" /* ModalContentPage */],
-                __WEBPACK_IMPORTED_MODULE_13__pages_statistics_stats__["a" /* StatsPage */]
+                __WEBPACK_IMPORTED_MODULE_16__pages_tickers_tickers__["a" /* TickersPage */],
+                __WEBPACK_IMPORTED_MODULE_17__pages_ticker_ticker__["a" /* TickerPage */],
+                __WEBPACK_IMPORTED_MODULE_18__pages_about_about__["a" /* AboutPage */],
+                __WEBPACK_IMPORTED_MODULE_0__pages_about_modal_content__["a" /* ModalContentPage */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__["a" /* SplashScreen */],
                 { provide: __WEBPACK_IMPORTED_MODULE_7__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_8_ionic_angular__["b" /* IonicErrorHandler */] },
-                __WEBPACK_IMPORTED_MODULE_16__providers_providers_providers__["a" /* ProvidersProvider */],
+                __WEBPACK_IMPORTED_MODULE_15__providers_providers_providers__["a" /* ProvidersProvider */],
             ]
         })
     ], AppModule);
@@ -2302,7 +2305,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 451:
+/***/ 450:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -2567,54 +2570,11 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 451;
+webpackContext.id = 450;
 
 /***/ }),
 
-/***/ 47:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TradePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__ = __webpack_require__(19);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var TradePage = /** @class */ (function () {
-    function TradePage(navCtrl, navParams, provider) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.provider = provider;
-        this.trade = this.navParams.data;
-    }
-    TradePage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad TradePage');
-    };
-    TradePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-trade',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/trade/trade.html"*/'\n<ion-header>\n  <ion-navbar color = "secondary">\n    <ion-title text-center> Trade #{{trade.id}}</ion-title>\n  </ion-navbar>\n</ion-header> \n\n\n<ion-content>\n  <ion-grid>\n\n <ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Status </span><br>\n          <span class = "ion-content">{{trade.status}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item [ngStyle]="{\'visibility\': trade.status == \'OPEN\' ? \'hidden\' : \'visible\' }">\n            <span class = "ion-heading">Percent Change </span><br>\n            <span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': trade.percentChange >= 0 ? \'green\' : \'red\'}">{{trade.percentChange}}%</span>          \n          </ion-item>\n    </ion-col>\n</ion-row>\n<ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Symbol </span><br> \n          <span class = "ion-content">{{trade.ticker}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Amount </span><br>\n            <span class = "ion-content">{{trade.amount}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>\n\n<ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Direction </span><br>\n          <span class = "ion-content">{{trade.direction}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Strategy </span><br>\n            <span class = "ion-content">{{trade.strategy1}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>\n<ion-row>   \n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Open Price </span><br>\n            <span class = "ion-content">${{trade.signalBuyPrice}}</span>\n          </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Open Time </span><br>\n            <span class = "ion-content">{{trade.buyTimestamp}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>        \n<ion-row [ngStyle]="{\'visibility\': trade.status == \'OPEN\' ? \'hidden\' : \'visible\' }">   \n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Close Price </span><br>\n            <span class = "ion-content">${{trade.signalSellPrice}}</span>\n          </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Close Time </span><br>\n            <span class = "ion-content">{{trade.sellTimestamp}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>   \n<ion-row>  \n    <ion-col>\n          <ion-item>\n            <span class = "ion-heading">Notes </span><br>\n            <span class = "ion-content">{{trade.strategy1Notes}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>   \n</ion-grid> \n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/trade/trade.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__["a" /* ProvidersProvider */]])
-    ], TradePage);
-    return TradePage;
-}());
-
-//# sourceMappingURL=trade.js.map
-
-/***/ }),
-
-/***/ 470:
+/***/ 469:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2628,7 +2588,7 @@ var TradePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_statistics_statistics__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_open_trades_open_trades__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_tickers_tickers__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_about_about__ = __webpack_require__(348);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_about_about__ = __webpack_require__(347);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2700,7 +2660,50 @@ var MyApp = /** @class */ (function () {
 
 //# sourceMappingURL=app.component.js.map
 
+/***/ }),
+
+/***/ 47:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TradePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__ = __webpack_require__(19);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var TradePage = /** @class */ (function () {
+    function TradePage(navCtrl, navParams, provider) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.provider = provider;
+        this.trade = this.navParams.data;
+    }
+    TradePage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad TradePage');
+    };
+    TradePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-trade',template:/*ion-inline-start:"/Users/vincents/Desktop/EphemeraUI/src/pages/trade/trade.html"*/'\n<ion-header>\n  <ion-navbar color = "secondary">\n    <ion-title text-center> Trade #{{trade.id}}</ion-title>\n  </ion-navbar>\n</ion-header> \n\n\n<ion-content>\n  <ion-grid>\n\n <ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Status </span><br>\n          <span class = "ion-content">{{trade.status}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item [ngStyle]="{\'visibility\': trade.status == \'OPEN\' ? \'hidden\' : \'visible\' }">\n            <span class = "ion-heading">Percent Change </span><br>\n            <span class = "ion-content" [ngStyle]="{\'font-weight\': \'bold\', \'color\': trade.percentChange >= 0 ? \'green\' : \'red\'}">{{trade.percentChange}}%</span>          \n          </ion-item>\n    </ion-col>\n</ion-row>\n<ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Symbol </span><br> \n          <span class = "ion-content">{{trade.ticker}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Amount </span><br>\n            <span class = "ion-content">{{trade.amount}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>\n\n<ion-row>   \n    <ion-col>\n      <ion-item>\n          <span class = "ion-heading">Direction </span><br>\n          <span class = "ion-content">{{trade.direction}}</span>\n      </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Strategy </span><br>\n            <span class = "ion-content">{{trade.strategy1}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>\n<ion-row>   \n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Open Price </span><br>\n            <span class = "ion-content">${{trade.signalBuyPrice}}</span>\n          </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Open Time </span><br>\n            <span class = "ion-content">{{trade.buyTimestamp}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>        \n<ion-row [ngStyle]="{\'visibility\': trade.status == \'OPEN\' ? \'hidden\' : \'visible\' }">   \n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Close Price </span><br>\n            <span class = "ion-content">${{trade.signalSellPrice}}</span>\n          </ion-item>\n    </ion-col>\n    <ion-col>\n        <ion-item>\n            <span class = "ion-heading">Close Time </span><br>\n            <span class = "ion-content">{{trade.sellTimestamp}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>   \n<ion-row>  \n    <ion-col>\n          <ion-item>\n            <span class = "ion-heading">Notes </span><br>\n            <span class = "ion-content">{{trade.strategy1Notes}}</span>\n          </ion-item>\n      </ion-col>\n</ion-row>   \n</ion-grid> \n</ion-content>\n'/*ion-inline-end:"/Users/vincents/Desktop/EphemeraUI/src/pages/trade/trade.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_providers_providers__["a" /* ProvidersProvider */]])
+    ], TradePage);
+    return TradePage;
+}());
+
+//# sourceMappingURL=trade.js.map
+
 /***/ })
 
-},[349]);
+},[348]);
 //# sourceMappingURL=main.js.map

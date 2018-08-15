@@ -16,7 +16,9 @@ export class TickersPage {
   public equityTickers : any;
   public forexTickers : any;
   public cryptoTickers : any;
-
+  descending: boolean = false;
+  order: number;
+  column: string = 'name';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public provider : ProvidersProvider) {
     this.tickers = "equityTickers";
@@ -49,7 +51,59 @@ export class TickersPage {
       return comparison;
     }  
 
+    compare1(a,b){
+      const tradeA = a.profit;
+      const tradeB = b.profit;
+      let comparison = 0;
+      if (tradeA > tradeB) {
+        comparison = 1;
+      } else if (tradeA < tradeB) {
+        comparison = -1;
+      }
+      return comparison * -1;
+    }
 
+    compare2(a,b){
+      const tradeA = a.name;
+      const tradeB = b.name;
+      let comparison = 0;
+      if (tradeA > tradeB) {
+        comparison = 1;
+      } else if (tradeA < tradeB) {
+        comparison = -1;
+      }
+      return comparison;
+    }
+
+    compare3(a,b){
+      const tradeA = a.count;
+      const tradeB = b.count;
+      let comparison = 0;
+      if (tradeA > tradeB) {
+        comparison = 1;
+      } else if (tradeA < tradeB) {
+        comparison = -1;
+      }
+      return comparison * -1;
+    }
+
+    profitSort(){
+      this.equityTickers = this.equityTickers.sort(this.compare1);
+      this.cryptoTickers = this.cryptoTickers.sort(this.compare1);
+      this.forexTickers =  this.forexTickers.sort(this.compare1)
+    }
+
+    nameSort(){
+      this.equityTickers = this.equityTickers.sort(this.compare2);
+      this.cryptoTickers = this.cryptoTickers.sort(this.compare2);
+      this.forexTickers =  this.forexTickers.sort(this.compare2)
+    }
+
+    countSort(){
+      this.equityTickers = this.equityTickers.sort(this.compare3);
+      this.cryptoTickers = this.cryptoTickers.sort(this.compare3);
+      this.forexTickers =  this.forexTickers.sort(this.compare3)
+    }
 
   equityTickerTapped($event, equityTicker){
     this.navCtrl.push(TickerPage, equityTicker);

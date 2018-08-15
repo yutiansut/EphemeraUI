@@ -20,6 +20,7 @@ import { AboutPage } from '../pages/about/about';
 import { MyApp } from './app.component';
 
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -34,7 +35,7 @@ import { MyApp } from './app.component';
     TickersPage,
     TickerPage,
     AboutPage,
-    ModalContentPage
+    ModalContentPage,
   ],
   imports: [
     BrowserModule,

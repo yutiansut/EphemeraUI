@@ -3,7 +3,7 @@
     <ion-navbar color = "secondary">
       <ion-title>Closed Trades</ion-title>
     </ion-navbar>
-    <ion-toolbar no-border-top>
+    <ion-toolbar no-border-top >
       <ion-segment [(ngModel)]="tickers">
         <ion-segment-button value = 'equityTickers'>
           Equity
@@ -16,6 +16,19 @@
         </ion-segment-button>
       </ion-segment>
     </ion-toolbar>
+    <ion-toolbar no-border-top >
+    <ion-segment>
+            <ion-segment-button type="button" (click)="countSort()">            
+              <span [ngStyle]="{'font-size': '9px'}">
+                Count</span></ion-segment-button>
+            <ion-segment-button type="button" (click)="nameSort()">              
+              <span [ngStyle]="{'font-size': '9px'}">
+                Name</span></ion-segment-button>
+            <ion-segment-button type="button"(click)="profitSort()">              
+              <span [ngStyle]="{'font-size': '9px'}">
+                Profit</span></ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
   </ion-header>
   
   <ion-content>
@@ -24,11 +37,14 @@
           <ion-item *ngFor="let equityTicker of equityTickers" ion-item (click)="equityTickerTapped($event, equityTicker)">
               <ion-grid>
                   <ion-row>
-                    <ion-col col-2>
-                        <ion-badge color = "badge">{{equityTicker.count}}</ion-badge>
+                    <ion-col col-3>
+                    <ion-badge color = "badge">{{equityTicker.count}}</ion-badge>
               </ion-col>
-              <ion-col>
+              <ion-col col-3>
                 {{equityTicker.name}}
+              </ion-col>
+              <ion-col col-3>
+                $<span [ngStyle]="{'font-weight': 'bold', 'color': equityTicker.profit >= 0 ? 'green' : 'red'}">{{equityTicker.profit}}</span>
               </ion-col>
               </ion-row>
             </ion-grid>
@@ -39,12 +55,14 @@
             <ion-item *ngFor="let forexTicker of forexTickers" ion-item (click)="forexTickerTapped($event, forexTicker)">
                 <ion-grid>
                     <ion-row>
-                      <ion-col col-2>
+                      <ion-col col-3>
                           <ion-badge color = "badge">{{forexTicker.count}}</ion-badge>
                 </ion-col>
-                <ion-col>
+                <ion-col col-3>
                   {{forexTicker.name}}
                 </ion-col>
+                <ion-col col-3>
+                  $<span [ngStyle]="{'font-weight': 'bold', 'color': forexTicker.profit >= 0 ? 'green' : 'red'}">{{forexTicker.profit}}</span>                </ion-col>
                 </ion-row>
                 </ion-grid>
               
@@ -55,12 +73,14 @@
         <ion-item *ngFor="let cryptoTicker of cryptoTickers" ion-item (click)="cryptoTickerTapped($event, cryptoTicker)">
             <ion-grid>
                 <ion-row>
-                  <ion-col col-2>
+                  <ion-col col-3>
                       <ion-badge color = "badge">{{cryptoTicker.count}}</ion-badge>
             </ion-col>
-            <ion-col>
+            <ion-col col-3>
               {{cryptoTicker.name}}
             </ion-col>
+            <ion-col col-3>
+              $<span [ngStyle]="{'font-weight': 'bold', 'color': cryptoTicker.profit >= 0 ? 'green' : 'red'}">{{cryptoTicker.profit}}</span>            </ion-col>
             </ion-row>
             </ion-grid>
           
